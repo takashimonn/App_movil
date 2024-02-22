@@ -4,7 +4,7 @@ import { Image, View, StyleSheet, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5'; 
 import IconEvilIcons from 'react-native-vector-icons/EvilIcons'; 
-
+import IconEntypo from 'react-native-vector-icons/Entypo'; 
 
 
 
@@ -54,7 +54,7 @@ function DrawerNavigaton() {
               onPress={() => props.navigation.navigate('NuevoCaballo')}
             />
             <DrawerItem
-              icon={() => <IconEvilIcons name="location" size={20}  />}
+              icon={() => <IconEntypo name="location-pin" size={20}  />}
               label={() => <Text style={styles.drawerItemLabel}>Ubicación</Text>}
               onPress={() => props.navigation.navigate('Ubicacion')}
             />
