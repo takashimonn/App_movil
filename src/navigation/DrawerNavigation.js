@@ -3,8 +3,9 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@rea
 import { Image, View, StyleSheet, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5'; 
-import IconEvilIcons from 'react-native-vector-icons/EvilIcons'; 
+// import IconEvilIcons from 'react-native-vector-icons/EvilIcons'; 
 import IconEntypo from 'react-native-vector-icons/Entypo'; 
+import IconAntDesing from 'react-native-vector-icons/AntDesign'
 
 
 
@@ -59,6 +60,7 @@ function DrawerNavigaton() {
               onPress={() => props.navigation.navigate('Ubicacion')}
             />
             <DrawerItem
+              icon={() => <IconAntDesing name="eye" size={20}  />}
               label={() => <Text style={styles.drawerItemLabel}>Parámetros</Text>}
               onPress={() => props.navigation.navigate('Parametros')}
             />
