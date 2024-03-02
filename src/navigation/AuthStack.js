@@ -16,3 +16,4 @@ const AuthNavigator = () => {
 }
 
 export default AuthNavigator;
+// jg
