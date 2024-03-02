@@ -196,6 +196,7 @@ function DrawerNavigaton() {
   );
 }
 
+
 // Estilos
 const styles = StyleSheet.create({
   container: {

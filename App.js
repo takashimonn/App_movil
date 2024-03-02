@@ -14,23 +14,21 @@
 
 
 import React, { useState } from 'react';
-import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import DrawerNavigaton from './src/navigation/DrawerNavigation';
-import AuthStack from './src/navigation/DrawerNavigation';
+import DrawerNavigator from './src/navigation/DrawerNavigation';
+import AuthNavigator from './src/navigation/AuthStack';
 
-function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Función para manejar el inicio de sesión exitoso
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? (
-        <View style={{ flex: 1 }}>
-          <DrawerNavigaton />
-        </View>
-      ) : (
-        <AuthStack />
-      )}
+      {isLoggedIn ? <DrawerNavigator /> : <AuthNavigator handleLogin={handleLogin} />}
     </NavigationContainer>
   );
 }
