@@ -16,4 +16,4 @@ const AuthNavigator = () => {
 }
 
 export default AuthNavigator;
-// jg
+// creo que ya quedo esta mamada 
