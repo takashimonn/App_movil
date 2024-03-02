@@ -16,7 +16,7 @@
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import DrawerNavigator from './src/navigation/DrawerNavigation';
-import AuthNavigator from './src/navigation/AuthStack';
+import { AuthNavigator } from './src/navigation/AuthStack';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

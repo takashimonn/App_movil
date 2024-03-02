@@ -5,7 +5,7 @@ import RegisterScreen from '../screens/RegisterScreen';
 
 const Stack = createStackNavigator();
 
-const AuthNavigator = () => {
+export const AuthNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Login" component={LoginScreen} />
@@ -15,5 +15,5 @@ const AuthNavigator = () => {
   );
 }
 
-export default AuthNavigator;
+// export default AuthNavigator;
 // creo que ya quedo esta mamada 
