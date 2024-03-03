@@ -1,8 +1,5 @@
 import React from "react";
 import { View, StyleSheet, Image, Text, TouchableOpacity, Button } from 'react-native';
-import NuevoCaballo from "./AgregarCabScreen";
-import Ubicacion from './UbicacionScreen';
-import Parametros from './ParametrosScreen';
 
 const InicioScreen = ({ navigation }) => {
     return(

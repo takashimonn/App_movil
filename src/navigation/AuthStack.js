@@ -14,6 +14,3 @@ export const AuthNavigator = () => {
     </Stack.Navigator>
   );
 }
-
-// export default AuthNavigator;
-// creo que ya quedo esta mamada 
