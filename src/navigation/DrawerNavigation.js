@@ -4,13 +4,14 @@ import { Image, View, StyleSheet, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5'; 
 import IconEntypo from 'react-native-vector-icons/Entypo'; 
-import IconAntDesing from 'react-native-vector-icons/AntDesign'
+import IconAntDesing from 'react-native-vector-icons/AntDesign';
 
 // Importación de screens
 import InicioScreen from '../screens/InicioScreen';
 import AgregarCabScreen from '../screens/AgregarCabScreen';
 import UbicacionScreen from '../screens/UbicacionScreen';
 import ParametrosScreen from '../screens/ParametrosScreen';
+import LoginScreen from '../screens/LoginScreen'; // Importa el LoginScreen
 
 const Drawer = createDrawerNavigator();
 
@@ -54,6 +55,12 @@ const DrawerNavigation = () => {
               icon={() => <IconAntDesing name="eye" size={20}  />}
               label={() => <Text style={styles.drawerItemLabel}>Parámetros</Text>}
               onPress={() => props.navigation.navigate('Parametros')}
+            />
+            {/* Agrega la opción de "Cerrar Sesión" */}
+            <DrawerItem
+              icon={() => <Icon name="sign-out" size={20} />} // Icono de cerrar sesión
+              label={() => <Text style={styles.drawerItemLabel}>Cerrar Sesión</Text>} // Etiqueta del item
+              onPress={() => props.navigation.navigate('Login')} // Redirecciona al LoginScreen al presionar
             />
           </View>
         </DrawerContentScrollView>
@@ -102,4 +109,3 @@ const styles = StyleSheet.create({
 });
 
 export default DrawerNavigation;
-
