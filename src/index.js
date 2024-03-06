@@ -7,7 +7,9 @@ const app = express();
 const port = 3000;
 
 // middleware
+app.use(express.json());
 app.use('/api', userRoute);
+
 
 mongoose.connect(process.env.MONGODB_URI)
 .then(() => console.log('si se conecto la bd we'))
