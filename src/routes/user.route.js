@@ -31,10 +31,10 @@ router.get('/user/:id', (req, res) => {
 
 // Update user
 router.put('/user/:id', (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     const {username, name, email, password} = req.body;
     userSchema
-    .updateOne({ _id: id }, { $set: {username, name, email, password} })
+    .updateOne({_id:id}, { $set: {username, name, email, password}})
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 });

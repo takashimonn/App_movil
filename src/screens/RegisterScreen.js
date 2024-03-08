@@ -100,30 +100,40 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } fro
 import axios from 'axios'; // Importa axios para realizar solicitudes HTTP
 
 const RegisterScreen = () => {
-  const [username, setUsername] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [username, setUsername] = useState('');
+  // const [name, setName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+
+  const [user, setUser] = useState({
+    username: "",
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (name, value) => setUser({ ...user, [name]: value });
 
   const handleRegister = () => {
     // Realiza la solicitud POST al backend para registrar al usuario
-    axios.post('http://localhost:3000/register', { // Reemplaza 'http://tu-api.com/register' con la URL de tu backend
-      username: username,
-      name: name,
-      email: email,
-      password: password
-    })
-    .then(response => {
-      // Maneja la respuesta del servidor
-      console.log(response.data); // Puedes mostrar la respuesta en la consola por ahora
-      Alert.alert('Registro exitoso'); // Muestra una alerta de registro exitoso
-      // Aquí podrías redirigir al usuario a otra pantalla, iniciar sesión automáticamente, etc.
-    })
-    .catch(error => {
-      // Maneja los errores
-      console.error('Error al registrar:', error);
-      Alert.alert('Error al registrar', 'Por favor, inténtalo de nuevo'); // Muestra una alerta de error
-    });
+    console.log(user);
+    // axios.post('http://localhost:3000/register', { // Reemplaza 'http://tu-api.com/register' con la URL de tu backend
+    //   username: user.username,
+    //   name: user.name,
+    //   email: user.email,
+    //   password: user.password
+    // })
+    // .then(response => {
+    //   // Maneja la respuesta del servidor
+    //   console.log(response.data); // Puedes mostrar la respuesta en la consola por ahora
+    //   Alert.alert('Registro exitoso'); // Muestra una alerta de registro exitoso
+    //   // Aquí podrías redirigir al usuario a otra pantalla, iniciar sesión automáticamente, etc.
+    // })
+    // .catch(error => {
+    //   // Maneja los errores
+    //   console.error('Error al registrar:', error);
+    //   Alert.alert('Error al registrar', 'Por favor, inténtalo de nuevo'); // Muestra una alerta de error
+    // });
   };
 
   return (
@@ -136,8 +146,8 @@ const RegisterScreen = () => {
             <TextInput
               style={styles.input}
               placeholder="Username"
-              value={username}
-              onChangeText={text => setUsername(text)}
+              value={user.username}
+              onChangeText={text => handleChange("username", text)}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -145,8 +155,8 @@ const RegisterScreen = () => {
             <TextInput
               style={styles.input}
               placeholder="Nombre"
-              value={name}
-              onChangeText={text => setName(text)}
+              value={user.name}
+              onChangeText={text =>handleChange("name", text)}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -155,8 +165,8 @@ const RegisterScreen = () => {
               style={styles.input}
               placeholder="Email"
               keyboardType="email-address"
-              value={email}
-              onChangeText={text => setEmail(text)}
+              value={user.email}
+              onChangeText={text => handleChange("email", text)}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -165,8 +175,8 @@ const RegisterScreen = () => {
               style={styles.input}
               placeholder="Contraseña"
               secureTextEntry
-              value={password}
-              onChangeText={text => setPassword(text)}
+              value={user.password}
+              onChangeText={text => handleChange("password", text)}
             />
           </View>
           <TouchableOpacity style={styles.button} onPress={handleRegister}>
