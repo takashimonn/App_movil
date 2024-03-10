@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const userRoute = require('./routes/user.route');
+const horseRoute = require('./routes/horse.route');
 
 const app = express();
 const port = 3000;
@@ -9,6 +10,7 @@ const port = 3000;
 // middleware
 app.use(express.json());
 app.use('/api', userRoute);
+app.use('/api', horseRoute);
 
 
 mongoose.connect(process.env.MONGODB_URI)
