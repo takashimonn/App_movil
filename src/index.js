@@ -3,9 +3,18 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const userRoute = require('./routes/user.route');
 const horseRoute = require('./routes/horse.route');
+const cors = require('cors');
+
 
 const app = express();
 const port = 3000;
+
+app.use(
+    cors({
+        origin: "http://localhost:8081",
+        credentials: true,
+    })
+)
 
 // middleware
 app.use(express.json());

@@ -11,7 +11,6 @@ import InicioScreen from '../screens/InicioScreen';
 import AgregarCabScreen from '../screens/AgregarCabScreen';
 import UbicacionScreen from '../screens/UbicacionScreen';
 import ParametrosScreen from '../screens/ParametrosScreen';
-import LoginScreen from '../screens/LoginScreen'; // Importa el LoginScreen
 
 const Drawer = createDrawerNavigator();
 

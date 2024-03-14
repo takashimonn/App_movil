@@ -1,30 +1,83 @@
-// import React from 'react';
-// import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-
+// import React, { useState } from 'react';
+// import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
+// import axios from 'axios'; 
 
 // const RegisterScreen = () => {
+//   const [user, setUser] = useState({
+//     username: "",
+//     name: "",
+//     email: "",
+//     password: "",
+//   });
+
+//   const handleChange = (name, value) => setUser({ ...user, [name]: value });
+
+//   const handleRegister = () => {
+//     // Realiza la solicitud POST al backend para registrar al usuario
+//     console.log(user);
+//     axios.post('http://localhost:3000/register', { // Reemplaza 'http://tu-api.com/register' con la URL de tu backend
+//       username: user.username,
+//       name: user.name,
+//       email: user.email,
+//       password: user.password
+//     })
+//     .then(response => {
+//       // Maneja la respuesta del servidor
+//       console.log(response.data); // Puedes mostrar la respuesta en la consola por ahora
+//       Alert.alert('Registro exitoso'); // Muestra una alerta de registro exitoso
+//       // Aquí podrías redirigir al usuario a otra pantalla, iniciar sesión automáticamente, etc.
+//     })
+//     .catch(error => {
+//       // Maneja los errores
+//       console.error('Error al registrar:', error);
+//       Alert.alert('Error al registrar', 'Por favor, inténtalo de nuevo'); // Muestra una alerta de error
+//     });
+//   };
+
 //   return (
 //     <View style={styles.container}>
 //       <View style={styles.contPrin}>
 //         <View style={styles.formContainer}>
-//         <Image source={require('../../assets/logo-niño-trans.png')} style={styles.logo} />
+//           <Image source={require('../../assets/logo-niño-trans.png')} style={styles.logo} />
 //           <View style={styles.inputContainer}>
 //             <Text style={styles.label}>Username:</Text>
-//             <TextInput style={styles.input} placeholder="Username" />
+//             <TextInput
+//               style={styles.input}
+//               placeholder="Username"
+//               value={user.username}
+//               onChangeText={text => handleChange("username", text)}
+//             />
 //           </View>
 //           <View style={styles.inputContainer}>
 //             <Text style={styles.label}>Nombre:</Text>
-//             <TextInput style={styles.input} placeholder="Nombre" />
+//             <TextInput
+//               style={styles.input}
+//               placeholder="Nombre"
+//               value={user.name}
+//               onChangeText={text =>handleChange("name", text)}
+//             />
 //           </View>
 //           <View style={styles.inputContainer}>
 //             <Text style={styles.label}>Email:</Text>
-//             <TextInput style={styles.input} placeholder="Email" keyboardType="email-address" />
+//             <TextInput
+//               style={styles.input}
+//               placeholder="Email"
+//               keyboardType="email-address"
+//               value={user.email}
+//               onChangeText={text => handleChange("email", text)}
+//             />
 //           </View>
 //           <View style={styles.inputContainer}>
 //             <Text style={styles.label}>Contraseña:</Text>
-//             <TextInput style={styles.input} placeholder="Contraseña" secureTextEntry />
+//             <TextInput
+//               style={styles.input}
+//               placeholder="Contraseña"
+//               secureTextEntry
+//               value={user.password}
+//               onChangeText={text => handleChange("password", text)}
+//             />
 //           </View>
-//           <TouchableOpacity style={styles.button}>
+//           <TouchableOpacity style={styles.button} onPress={handleRegister}>
 //             <Text style={styles.buttonText}>Registrar</Text>
 //           </TouchableOpacity>
 //         </View>
@@ -39,7 +92,6 @@
 //     justifyContent: 'center',
 //     alignItems: 'center',
 //   },
-
 //   contPrin: {
 //     backgroundColor: 'green',
 //     width: '90%',
@@ -56,7 +108,6 @@
 //     height: '85%',
 //     marginTop: '15%'
 //   },
-
 //   inputContainer: {
 //     marginBottom: 10,
 //     width: '100%',
@@ -97,14 +148,9 @@
 
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
-import axios from 'axios'; // Importa axios para realizar solicitudes HTTP
+import axios from 'axios'; 
 
 const RegisterScreen = () => {
-  // const [username, setUsername] = useState('');
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-
   const [user, setUser] = useState({
     username: "",
     name: "",
@@ -114,26 +160,16 @@ const RegisterScreen = () => {
 
   const handleChange = (name, value) => setUser({ ...user, [name]: value });
 
-  const handleRegister = () => {
-    // Realiza la solicitud POST al backend para registrar al usuario
-    console.log(user);
-    // axios.post('http://localhost:3000/register', { // Reemplaza 'http://tu-api.com/register' con la URL de tu backend
-    //   username: user.username,
-    //   name: user.name,
-    //   email: user.email,
-    //   password: user.password
-    // })
-    // .then(response => {
-    //   // Maneja la respuesta del servidor
-    //   console.log(response.data); // Puedes mostrar la respuesta en la consola por ahora
-    //   Alert.alert('Registro exitoso'); // Muestra una alerta de registro exitoso
-    //   // Aquí podrías redirigir al usuario a otra pantalla, iniciar sesión automáticamente, etc.
-    // })
-    // .catch(error => {
-    //   // Maneja los errores
-    //   console.error('Error al registrar:', error);
-    //   Alert.alert('Error al registrar', 'Por favor, inténtalo de nuevo'); // Muestra una alerta de error
-    // });
+  const handleRegister = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/api/user', user);
+      console.log(response.data); 
+      Alert.alert('Registro exitoso'); 
+      
+    } catch (error) {
+      console.error('Error al registrar:', error);
+      Alert.alert('Error al registrar', 'Por favor, inténtalo de nuevo');
+    }
   };
 
   return (
@@ -156,7 +192,7 @@ const RegisterScreen = () => {
               style={styles.input}
               placeholder="Nombre"
               value={user.name}
-              onChangeText={text =>handleChange("name", text)}
+              onChangeText={text => handleChange("name", text)}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -247,4 +283,3 @@ const styles = StyleSheet.create({
 });
 
 export default RegisterScreen;
-// 
