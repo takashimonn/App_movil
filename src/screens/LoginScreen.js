@@ -1,14 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
+// // import axios from 'axios'
 
 const LoginScreen = () => {
   const navigation = useNavigation();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
+//   // const handleLogin = async () => {
+//     // try {
+//     //   const response = await axios('http://localhost:3000/api/login', {
+//     //     method: 'POST',
+//     //     headers: {
+//     //       'Content-Type': 'application/json',
+//     //     },
+//     //     body: JSON.stringify({
+//     //       username: username, 
+//     //       password: password, 
+//     //     }),
+//     //   });
+
+//     //   const data = await response.json();
+
+//     //   if (!response.ok) {
+//     //     throw new Error(data.message);
+//     //   }
+
+//     //   // Mostrar alerta de inicio de sesión exitoso
+//     //   Alert.alert('Bienvenido', `¡Hola ${data.username}!`);
+//     //   navigation.navigate('InicioScreen');
+//     // } catch (error) {
+//     //   console.error('Error al iniciar sesión:', error.message);
+      
+//     //   // Mostrar alerta de error de inicio de sesión
+//     //   Alert.alert('Error', error.message);
+//     // }
+     
+
+//   // };
   const handleLogin = () => {
-    navigation.navigate('DrawerNavigation'); 
+    navigation.navigate('DrawerNavigation');
   };
 
+
+  
   const handleRegister = () => {
     navigation.navigate('RegisterScreen'); 
   };
@@ -19,8 +55,21 @@ const LoginScreen = () => {
       <Text style={styles.texto}> Inicia Sesión </Text>
       <View style={styles.containerBlue}>
         <View style={styles.form}>
-          <TextInput style={styles.input} placeholder="Nombre de usuario" placeholderTextColor="#000" />
-          <TextInput style={styles.input} placeholder="Contraseña" placeholderTextColor="#000" secureTextEntry />
+          <TextInput
+            style={styles.input}
+            placeholder="Nombre de usuario"
+            placeholderTextColor="#000"
+            onChangeText={setUsername}
+            value={username}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Contraseña"
+            placeholderTextColor="#000"
+            secureTextEntry
+            onChangeText={setPassword}
+            value={password}
+          />
         </View>
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Continuar</Text>
@@ -64,7 +113,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     fontWeight: 'bold',
     marginTop: 10,
-    fontFamily: 'Pacifico', 
+    // fontFamily: 'Pacifico', 
   },
   form: {
     width: '90%',

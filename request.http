@@ -38,9 +38,9 @@ POST http://localhost:3000/api/horse HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Samaritano",
+    "name": "Firulais",
     "age": "23",
-    "breed": "no se que es breed",
+    "breed": "bullterry",
     "diseases": "ninguna",
     "user": "65eb7650dba91091e2694a5a"
 
@@ -66,4 +66,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/horse/65ed156fbb2caabcaeb087cf HTTP/1.1
+DELETE http://localhost:3000/api/horse/65fc4f3eee0f9f59115ec9f3 HTTP/1.1
