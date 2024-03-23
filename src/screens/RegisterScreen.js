@@ -162,7 +162,7 @@ const RegisterScreen = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/api/user', user);
+      const response = await axios.post('http://172.20.99.46:3000/api/user', user);
       console.log(response.data); 
       Alert.alert('Registro exitoso'); 
       
