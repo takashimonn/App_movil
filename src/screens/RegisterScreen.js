@@ -182,7 +182,7 @@ const RegisterScreen = () => {
             <TextInput
               style={styles.input}
               placeholder="Username"
-              value={user.username}
+              value={user.username} 
               onChangeText={text => handleChange("username", text)}
             />
           </View>
