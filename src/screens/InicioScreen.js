@@ -8,7 +8,7 @@ const InicioScreen = ({ navigation }) => {
     useEffect(() => {
         const obtenerCaballos = async () => {
             try {
-                const response = await axios.get('http://192.168.1.10:3000/api/horse');
+                const response = await axios.get('http://192.168.1.12:3000/api/horse');
                 setCaballos(response.data);
             } catch (error) {
                 console.error("Error al obtener los caballos:", error);
