@@ -4,7 +4,7 @@ require('dotenv').config();
 const userRoute = require('./routes/user.route');
 const horseRoute = require('./routes/horse.route');
 const cors = require('cors');
-
+ 
 
 const app = express();
 const port = 3000;

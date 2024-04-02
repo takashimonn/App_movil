@@ -10,7 +10,7 @@ export const AuthNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
-      {/* Agregar más pantallas de autenticación si es necesario */}
     </Stack.Navigator>
   );
 }
+

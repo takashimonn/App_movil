@@ -1,9 +1,11 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import DrawerNavigation from './src/navigation/DrawerNavigation';
+
+// import DrawerNavigation from './src/navigation/DrawerNavigation';
 import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
+import TabNavigation from './src/navigation/TabNavigation';
 
 const Stack = createStackNavigator();
 
@@ -13,7 +15,8 @@ const App = () => {
       <Stack.Navigator>
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} options={{ headerShown: true, headerTitle: 'Registro' }}  />
-        <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} options={{ headerShown: false }} />
+        {/* <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} options={{ headerShown: false }} /> */}
+        <Stack.Screen name="TabNavigation" component={TabNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
   );

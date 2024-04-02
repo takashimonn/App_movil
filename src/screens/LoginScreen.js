@@ -40,7 +40,7 @@ const LoginScreen = () => {
 
 //   // };
   const handleLogin = () => {
-    navigation.navigate('DrawerNavigation');
+    navigation.navigate('TabNavigation');
   };
 
 
