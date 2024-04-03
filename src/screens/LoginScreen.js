@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    backgroundColor: '#5D62D5',
+    backgroundColor: 'green',
     padding: 10,
     borderRadius: 5,
     width: '90%',
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginTop: 20,
-    color: '#5D62D5',
+    color: 'black',
   },
   link: {
     color: '#5D62D5',

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableOpacity, Button } from 'react-native';
 import axios from 'axios';
 
 const InicioScreen = ({ navigation }) => {
@@ -17,6 +17,12 @@ const InicioScreen = ({ navigation }) => {
 
         obtenerCaballos();
     }, []);
+
+
+    const navigateToAnotherScreen = () => {
+        navigation.navigate('NuevoCab');
+      };
+    
 
     return (
         <View style={styles.container}>
@@ -36,7 +42,15 @@ const InicioScreen = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
             ))}
+
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>¡Aquí van los veterinarios!</Text>
+            <Button title="Ir a otro screen" onPress={navigateToAnotherScreen} />
         </View>
+        </View>
+        
+                        
+
     );
 }
 
