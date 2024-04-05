@@ -8,6 +8,7 @@ import ChequeoScreen from '../screens/ChequeoScreen';
 import PerfilScreen from '../screens/PerfilScreen';
 import VetScren from '../screens/VetScren';
 import NewVetsScreen from '../screens/NewVetsScreen';
+import { Button, Icon } from 'react-native-elements';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -20,10 +21,30 @@ const Stack = createStackNavigator();
 function InicioStack() {
   return (
     <Stack.Navigator>
-        <Stack.Screen name="Inicio" component={InicioScreen} options={{ headerShown: false }} />
+        {/* <Stack.Screen name="Inicio" component={InicioScreen} options={{ headerShown: true, headerTitle: 'Inicio' }} /> */}
+        <Stack.Screen             name="Inicio"
+            component={InicioScreen}
+            options={({ navigation }) => ({
+                headerRight: () => (
+                    <Button
+                        icon={
+                            <Icon
+                                name="add"
+                                size={30}
+                                color="black"
+                                background='white'
+                                style={{ marginRight: 20 }}
+                            />
+                        }
+                        onPress={() => navigation.navigate('NuevoCab')}
+                        buttonStyle={{ backgroundColor: 'transparent' }}
+                    />
+                ),
+            })}
+        /> 
         <Stack.Screen name="Parametros" component={ParametrosScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="NewVets" component={NewVetsScreen} options={{ headerShown: false }}  />
-        <Stack.Screen name="NuevoCab" component={AgregarCabScreen} options={{ headerShown: false}} />
+        <Stack.Screen name="NewVets" component={NewVetsScreen} options={{ headerShown: true, headerTitle: 'Nuevo Veterinario'}}  />
+        <Stack.Screen name="NuevoCab" component={AgregarCabScreen} options={{ headerShown: true, headerTitle: 'Nuevo Caballo'}} />
     </Stack.Navigator>
   );
 }
@@ -35,25 +56,16 @@ export default function TabNavigation() {
             name="Inicio" 
             component={InicioStack} 
             options={{ 
-                headerShown: false,
-                tabBarIcon: () => <Ionicons name="home-outline" size={24} color="black" /> 
-                }}  />
-
-        {/* <Tab.Screen
-            name="NuevoCab"
-            component={AgregarCabScreen}
-            options={{
               headerShown: false,
-              tabBarIcon: () => <Ionicons name="add-circle-outline" size={24} color="black" /> 
-            }}
-        /> */}
+              tabBarIcon: () => <Ionicons name="home-outline" size={24} color="black" /> 
+                }}  />
 
         <Tab.Screen 
             name="Chequeo" 
             component={ChequeoScreen} 
             options={{ 
-                headerShown: false,
-                tabBarIcon: () => <Ionicons name="clipboard-outline" size={24} color="black" /> 
+              headerShown: true, headerTitle: 'Chequeo',
+              tabBarIcon: () => <Ionicons name="clipboard-outline" size={24} color="black" /> 
             }} 
         />
 
@@ -61,8 +73,8 @@ export default function TabNavigation() {
             name="Veterinarios"
             component={VetScren}
             options={{
-                headerShown: false,
-                tabBarIcon: () => <Ionicons name="bag-add-outline" size={24} color="black" />
+              headerShown: true, headerTitle: 'Veterinarios',
+              tabBarIcon: () => <Ionicons name="bag-add-outline" size={24} color="black" />
             }}
         />
 
@@ -70,8 +82,8 @@ export default function TabNavigation() {
             name="Perfil"
             component={PerfilScreen}
             options={{
-                headerShown: false,
-                tabBarIcon: () => <Ionicons name="person-outline" size={24} color="black" />
+              headerShown: true, headerTitle: 'Perfil',
+              tabBarIcon: () => <Ionicons name="person-outline" size={24} color="black" />
 
             }}
         />
