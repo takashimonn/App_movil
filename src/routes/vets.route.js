@@ -1,27 +1,26 @@
 const express = require('express');
-const userSchema = require('../models/horse.model');
+const userSchema = require('../models/vets.model');
 
 const router = express.Router();
 
-// create new horse 
-router.post('/horse', (req, res) => {
+// Create a new vet
+router.post('/vets', (req, res) => {
     const user = userSchema(req.body);
-    user
-    .save()
+    user.save()
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 });
 
-// Get all horses
-router.get('/horse', (req, res) => {
+// Get all vets
+router.get('/vets', (req, res) => {
     userSchema
     .find()
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 });
 
-//  Get a horse
-router.get('/horse/:id', (req, res) => {
+// Get a vet
+router.get('/vets/:id', (req, res) => {
     const { id } = req.params;
     userSchema
     .findById(id)
@@ -29,24 +28,23 @@ router.get('/horse/:id', (req, res) => {
     .catch((error) => res.json({ message: error }));
 });
 
-// Update user
-router.put('/horse/:id', (req, res) => {
+// Update vet
+router.put('/vets/:id', (req, res) => {
     const { id } = req.params;
-    const { name, age, breed, diseases, user} = req.body;
+    const { firstName, lastName, age, email, phone} = req.body;
     userSchema
-    .updateOne({_id:id}, { $set: { name, age, breed, diseases, user}})
+    .updateOne({_id:id}, { $set: {firstName, lastName, age, email, phone}})
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 });
 
-// Delete horse
-router.delete('/horse/:id', (req, res) => {
-    const {id} = req.params;
+// Delete vet
+router.delete('/vets/:id', (req, res) => {
+    const { id } = req.params;
     userSchema
     .deleteOne({_id: id})
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 });
-
 
 module.exports = router;
