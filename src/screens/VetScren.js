@@ -1,34 +1,65 @@
-import React, { useEffect } from 'react';
-import { View, Text, Button } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
-const VetScreen = ({ Navigation }) => {
-  // const navigation = useNavigation();
-  const [veterinarios, SetVeterinarios] = useState([]);
+const VetScreen = () => {
+  const navigation = useNavigation();
+  const [veterinarians, setVeterinarians] = useState([]);
 
   useEffect(() => {
-    const obtenerVets = async () => {
+    const fetchVeterinarians = async () => {
       try {
-        const response = await axios.get('http://192.168.1.16:3000/api/veterinarios');
-        SetVeterinarios(response.data);
+        const response = await axios.get('http://192.168.1.16:3000/api/vets');
+        setVeterinarians(response.data);
       } catch (error) {
-        console.error("Error al obtener los caballos: ", error);
+        console.error("Error al obtener los veterinarios:", error);
       }
     };
-
-    obtenerVets();
+    fetchVeterinarians();
   }, []);
 
-  const navigateToAnotherScreen = () => {
-    navigation.navigate('NewVets');
-  };
-
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>¡Aquí van los veterinarios!</Text>
-      <Button title="Ir a otro screen" onPress={navigateToAnotherScreen} />
+  return ( 
+    <View style={styles.container}>
+      {veterinarians.map(vet => (
+        <TouchableOpacity
+          key={vet._id}
+          style={styles.card}
+          onPress={() => navigation.navigate('DetalleVet', { vetId: vet._id })}
+        >
+          <Text style={styles.text}>{vet.firstName} {vet.lastName}</Text>
+          <Text style={styles.text}>Edad: {vet.age}</Text>
+          <Text style={styles.text}>Email: {vet.email}</Text>
+          <Text style={styles.text}>Teléfono: {vet.phone}</Text>
+        </TouchableOpacity>
+      ))}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  header: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  card: {
+    backgroundColor: 'rgba(201, 252, 181, 0.8)',
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10,
+    width: '100%',
+  },
+  text: {
+    fontSize: 16,
+    marginBottom: 5,
+  }
+});
 
 export default VetScreen;

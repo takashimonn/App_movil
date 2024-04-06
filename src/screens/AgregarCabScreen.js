@@ -10,7 +10,7 @@ const AgregarCabScreen = () => {
 
   const enviarDatos = () => {
     axios.post('http://192.168.1.16:3000/api/horse', {
-      name: nombre,
+      name: nombre, 
       age: edad,
       breed: raza,
       diseases: enfermedades,

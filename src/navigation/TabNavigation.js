@@ -21,26 +21,26 @@ const Stack = createStackNavigator();
 function InicioStack() {
   return (
     <Stack.Navigator>
-        {/* <Stack.Screen name="Inicio" component={InicioScreen} options={{ headerShown: true, headerTitle: 'Inicio' }} /> */}
-        <Stack.Screen             name="Inicio"
-            component={InicioScreen}
-            options={({ navigation }) => ({
-                headerRight: () => (
-                    <Button
-                        icon={
-                            <Icon
-                                name="add"
-                                size={30}
-                                color="black"
-                                background='white'
-                                style={{ marginRight: 20 }}
-                            />
-                        }
-                        onPress={() => navigation.navigate('NuevoCab')}
-                        buttonStyle={{ backgroundColor: 'transparent' }}
-                    />
-                ),
-            })}
+        <Stack.Screen
+          name="Inicio"
+          component={InicioScreen}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <Button
+                icon={
+                  <Icon
+                    name="add"
+                    size={30}
+                    color="black"
+                    background='white'
+                    style={{ marginRight: 20 }}
+                  />
+                }
+                onPress={() => navigation.navigate('NuevoCab')}
+                buttonStyle={{ backgroundColor: 'transparent' }}
+              />
+            ),
+          })}
         /> 
         <Stack.Screen name="Parametros" component={ParametrosScreen} options={{ headerShown: false }} />
         <Stack.Screen name="NewVets" component={NewVetsScreen} options={{ headerShown: true, headerTitle: 'Nuevo Veterinario'}}  />
@@ -69,14 +69,35 @@ export default function TabNavigation() {
             }} 
         />
 
-        <Tab.Screen
+          <Tab.Screen
             name="Veterinarios"
             component={VetScren}
-            options={{
-              headerShown: true, headerTitle: 'Veterinarios',
-              tabBarIcon: () => <Ionicons name="bag-add-outline" size={24} color="black" />
-            }}
-        />
+            options={({ navigation }) => ({
+              headerTitle: 'Veterinarios',
+              headerRight: () => (
+                <Button
+                  icon={
+                    <Icon
+                      name="add"
+                      size={30}
+                      color="black"
+                      style={{ marginRight: 20 }}
+                    />
+                  }
+                  onPress={() => navigation.navigate('NewVets')}
+                  buttonStyle={{ backgroundColor: 'transparent' }}
+                />
+              ),
+              tabBarIcon: ({ size }) => (
+                <Icon
+                  name="bag-add-outline"
+                  type="ionicon"
+                  size={size}
+                  color="black"
+                />
+              )
+            })}
+          />          
 
         <Tab.Screen
             name="Perfil"

@@ -1,27 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
-import axios from 'axios';
-import { Button, Icon } from 'react-native-elements'; // Importamos Button e Icon de react-native-elements
+import { getHorses } from "../API/API";
 
 const InicioScreen = ({ navigation }) => {
     const [caballos, setCaballos] = useState([]);
 
+    const getData = async () => {
+        const data = await getHorses();
+        setCaballos(data)
+        console.log(data)
+    }
+
     useEffect(() => {
-        const obtenerCaballos = async () => {
-            try {
-                const response = await axios.get('http://192.168.1.16:3000/api/horse');
-                setCaballos(response.data);
-            } catch (error) {
-                console.error("Error al obtener los caballos:", error);
-            }
-        };
-
-        obtenerCaballos();
+        getData()
     }, []);
-
-    const navigateToAnotherScreen = () => {
-        navigation.navigate('NuevoCab');
-    };
 
     return (
         <View style={styles.container}>
