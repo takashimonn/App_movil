@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-// import axios from 'axios';
-import { registerVet } from '../API/API';
+import axios from 'axios';
 
 const NewVetsScreen = () => {
   const [user, setUser] = useState({
@@ -16,11 +15,10 @@ const NewVetsScreen = () => {
 
   const handleRegister = async () => {
     try {
-      const vet = await registerVet(user);
-      // console.log(user); 
-      if(vet) {
-        Alert.alert('Registro exitoso');
-      } 
+      const response = await axios.post('http://192.168.1.16:3000/api/vets', user);
+      console.log(response.data); 
+      Alert.alert('Registro exitoso');
+
     } catch (error) {
       console.error('Error al registrar:', error);
       Alert.alert('Error al registrar', 'Por favor, inténtalo de nuevo');

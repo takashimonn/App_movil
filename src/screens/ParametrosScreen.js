@@ -9,7 +9,7 @@ const ParametrosScreen = ({ route }) => {
   useEffect(() => {
     const fetchHorseData = async () => {
       try {
-        const response = await axios.get(`http://192.168.1.15:3000/api/horse/${route.params.caballoId}`);
+        const response = await axios.get(`http://192.168.1.16:3000/api/horse/${route.params.caballoId}`);
         setHorseData(response.data);
       } catch (error) {
         console.error('Error al obtener los datos del caballo:', error);
@@ -192,6 +192,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 20,
     borderRadius: 10,
+    width: '70%'
   },
 
   infoText: {

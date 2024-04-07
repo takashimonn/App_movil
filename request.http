@@ -100,4 +100,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/vets/66109d7825235b008b473097 HTTP/1.1
+DELETE http://localhost:3000/api/vets/6610d632dfe1cd9e4f43e8b3 HTTP/1.1

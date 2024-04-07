@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   card: {
-    backgroundColor: 'rgba(201, 252, 181, 0.8)',
+    backgroundColor: '#A6E58D',
     borderRadius: 10,
     padding: 10,
     marginBottom: 10,
