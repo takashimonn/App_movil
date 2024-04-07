@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'reac
 import axios from 'axios';
 
 const NewVetsScreen = () => {
-  const [user, setUser] = useState({
+  const [vet, setVet] = useState({
     firstName: "",
     lastName: "",
     age: "",
@@ -11,11 +11,11 @@ const NewVetsScreen = () => {
     phone: "",
   });
 
-  const handleChange = (name, value) => setUser({ ...user, [name]: value });
+  const handleChange = (name, value) => setVet({ ...vet, [name]: value });
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post('http://192.168.1.16:3000/api/vets', user);
+      const response = await axios.post('http://192.168.1.16:3000/api/vets', vet);
       console.log(response.data); 
       Alert.alert('Registro exitoso');
 
