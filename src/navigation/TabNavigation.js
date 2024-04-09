@@ -64,7 +64,7 @@ export default function TabNavigation() {
             name="Chequeo" 
             component={ChequeoScreen} 
             options={{ 
-              headerShown: true, headerTitle: 'Chequeo',
+              headerShown: true, headerTitle: 'Chequeo Rutinario',
               tabBarIcon: () => <Ionicons name="clipboard-outline" size={24} color="black" /> 
             }} 
         />

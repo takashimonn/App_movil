@@ -8,7 +8,6 @@ const InicioScreen = ({ navigation }) => {
     const getData = async () => {
         const data = await getHorses();
         setCaballos(data)
-        console.log(data)
     }
 
     useEffect(() => {
