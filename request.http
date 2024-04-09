@@ -101,3 +101,38 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/api/vets/6610d632dfe1cd9e4f43e8b3 HTTP/1.1
+
+###
+POST http://localhost:3000/api/checks HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Samaritano2",
+    "medicines": "suerito",
+    "specifications": "anduvo triston",
+    "food": "una paca",
+    "horseshoes": "todavia awantan",
+    "job": "8 horas"
+}
+
+###
+GET http://localhost:3000/api/checks HTTP/1.1
+
+###
+GET http://localhost:3000/api/checks/6614cfadabbf3b53b8877eb2
+
+###
+PUT http://localhost:3000/api/checks/6614cfadabbf3b53b8877eb2 HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "firulais",
+    "medicines": "sueritos",
+    "specifications": "anduvo tristones",
+    "food": "una pacaasd",
+    "horseshoes": "todavia awantan",
+    "job": "8 horas"
+}
+
+###
+DELETE http://localhost:3000/api/checks/6614cfadabbf3b53b8877eb2 HTTP/1.1

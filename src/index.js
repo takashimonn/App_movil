@@ -4,6 +4,7 @@ require('dotenv').config();
 const userRoute = require('./routes/user.route');
 const horseRoute = require('./routes/horse.route');
 const VetsRoute = require('./routes/vets.route');
+const checkRoute = require('./routes/chequeo.route');
 const cors = require('cors');
  
 
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use('/api', userRoute);
 app.use('/api', horseRoute);
 app.use('/api', VetsRoute);
+app.use('/api', checkRoute);
 
 
 mongoose.connect(process.env.MONGODB_URI)
