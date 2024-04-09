@@ -3,13 +3,6 @@ const userSchema = require('../models/chequeo.model');
 
 const router = express.Router();
 
-// Create a new check
-// router.post('/checks', (req, res) => {
-//     const user = userSchema(req.body);
-//     user.save()
-//     .then((data) => res.json(data))
-//     .catch((error) => res.json({ message: error }));
-// });
 
 // Create a new check
 router.post('/checks', (req, res) => {
