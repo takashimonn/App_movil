@@ -6,8 +6,8 @@ const router = express.Router();
 
 // Create a new check
 router.post('/checks', (req, res) => {
-    const { name, medicines, specifications, food, horseshoes, job } = req.body;
-    const user = new userSchema({ name, medicines, specifications, food, horseshoes, job });
+    const { namehorse, medicines, specifications, food, horseshoes, job } = req.body;
+    const user = new userSchema({ namehorse, medicines, specifications, food, horseshoes, job });
     user.save()
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
@@ -34,9 +34,9 @@ router.get('/checks/:id', (req, res) => {
 // Update check
 router.put('/checks/:id', (req, res) => {
     const { id } = req.params;
-    const { name, medicines, specifications, food, horseshoes, job } = req.body;
+    const { namehorse, medicines, specifications, food, horseshoes, job } = req.body;
     userSchema
-    .updateOne({_id:id}, { $set: {name, medicines, specifications, food, horseshoes, job}})
+    .updateOne({_id:id}, { $set: {namehorse, medicines, specifications, food, horseshoes, job}})
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 });

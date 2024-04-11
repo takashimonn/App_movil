@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const checkSchema = new mongoose.Schema({
-    name: {
+    namehorse: {
         type: String,
         required: true,
         trim: true,
-        unique: true,
+        // unique: true,
     },
     medicines: {
         type: String, 
