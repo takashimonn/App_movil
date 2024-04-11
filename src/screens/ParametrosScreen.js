@@ -9,7 +9,7 @@ const ParametrosScreen = ({ route }) => {
   useEffect(() => {
     const fetchHorseData = async () => {
       try {
-        const response = await axios.get(`http://172.20.102.158:3000/api/horse/${route.params.caballoId}`);
+        const response = await axios.get(`http://172.20.99.105:3000/api/horse/${route.params.caballoId}`);
         setHorseData(response.data);
       } catch (error) {
         console.error('Error al obtener los datos del caballo:', error);
