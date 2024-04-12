@@ -79,21 +79,12 @@ const LoginScreen = () => {
           <Text style={styles.registerText}>¿Aún no tienes una cuenta?</Text>
           <Text style={styles.link} onPress={handleRegister}>Registrarse</Text>
         </View>
-      </View>
-      <Text style={styles.textRegistro}> O inicia sesión con tus redes sociales </Text>
-      <View style={styles.contRegistro}>
-        <TouchableOpacity style={styles.buttonRegistro} onPress={handleRegister}>
-          <Image source={require('../../assets/google.png')} style={styles.imagenRegistro}/>
-        </TouchableOpacity>
+          </View>
+            </View>
+       
 
-        <TouchableOpacity style={styles.buttonRegistro} onPress={handleRegister}>
-          <Image source={require('../../assets/facebook.png')} style={styles.imagenRegistro}/>
-        </TouchableOpacity>
-      </View>
-    </View>
   );
-};
-
+  };
 const styles = StyleSheet.create({ 
   container: {
     flex: 1,
