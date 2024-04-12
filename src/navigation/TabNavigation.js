@@ -22,7 +22,7 @@ function InicioStack() {
   return (
     <Stack.Navigator>
         <Stack.Screen
-          name="Inicio"
+          name="InicioStackScreen"
           component={InicioScreen}
           options={({ navigation }) => ({
             headerRight: () => (
