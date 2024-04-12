@@ -87,15 +87,15 @@ GET http://localhost:3000/api/vets HTTP/1.1
 GET http://localhost:3000/api/vets/66109d7825235b008b473097 HTTP/1.1
 
 ###
-PUT http://localhost:3000/api/vets/660f66597e38180a748f7e9b HTTP/1.1
+PUT http://localhost:3000/api/vets/6618282aa8cc63a30784b94f HTTP/1.1
 Content-Type: application/json
 
 {
-    "firstName": "Sergio Chiquito",
-    "lastName": "Amador",
-    "age": "19",
-    "email": "sergio@gmail.com",
-    "phone": "6188236422"
+    "firstName": "A",
+    "lastName": "A",
+    "age": "A",
+    "email": "A",
+    "phone": "A"
 
 }
 

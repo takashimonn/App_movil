@@ -77,6 +77,11 @@ const VetScreen = () => {
       // Actualizar la lista de veterinarios después de actualizar
       const response = await axios.get('http://172.20.99.105:3000/api/vets');
       setVeterinarians(response.data);
+
+      Alert.alert(
+        "Se me hace que ya se armo la machaca hermana",
+      );
+
       setShowUpdateForm(false);
     } catch (error) {
       console.error("Error al actualizar el veterinario:", error);
