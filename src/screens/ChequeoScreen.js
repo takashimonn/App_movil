@@ -719,7 +719,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   botonAgregar: {
-    backgroundColor: 'green',
+    backgroundColor: '#21AEF9',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
