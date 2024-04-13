@@ -587,8 +587,8 @@ const ChequeoScreen = () => {
   };
 
   const handleSubmit = () => {
-    axios.post('http://172.20.102.158:3000/api/checks',{
-      name: nombre,
+    axios.post('http://172.20.97.136:3000/api/checks',{
+      namehorse: nombre,
       medicines: medicinasSeleccionadas.join(', '), // Convertir el array de medicinas a una cadena separada por comas
       specifications: especificaciones,
       food: alimento,

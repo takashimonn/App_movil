@@ -8,6 +8,7 @@ import ChequeoScreen from '../screens/ChequeoScreen';
 import PerfilScreen from '../screens/PerfilScreen';
 import VetScren from '../screens/VetScren';
 import NewVetsScreen from '../screens/NewVetsScreen';
+import BienvenidaScreen from '../screens/BienvenidaScreen';
 import { Button, Icon } from 'react-native-elements';
 
 import { Ionicons } from '@expo/vector-icons';
@@ -52,6 +53,13 @@ function InicioStack() {
 export default function TabNavigation() {
   return (
     <Tab.Navigator>
+        <Tab.Screen 
+            name="Bienvenido" 
+            component={BienvenidaScreen} 
+            options={{ 
+              headerShown: false,
+              tabBarIcon: () => <Ionicons name="home-outline" size={24} color="black" /> 
+                }}  />
         <Tab.Screen 
             name="Inicio" 
             component={InicioStack} 

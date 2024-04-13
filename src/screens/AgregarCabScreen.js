@@ -9,7 +9,7 @@ const AgregarCabScreen = () => {
   const [enfermedades, setEnfermedades] = useState('');
 
   const enviarDatos = () => {
-    axios.post('http://172.20.102.158:3000/api/horse', {
+    axios.post('http://172.20.97.136:3000/api/horse', {
       name: nombre, 
       age: edad,
       breed: raza,
