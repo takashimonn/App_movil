@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 const ParametrosScreen = ({ route }) => {
+  const navigation = useNavigation();
   const [horseData, setHorseData] = useState(null);
   const [showInfo, setShowInfo] = useState(false);
 
   useEffect(() => {
     const fetchHorseData = async () => {
       try {
-        const response = await axios.get(`http://172.20.97.136:3000/api/horse/${route.params.caballoId}`);
+        const response = await axios.get(`http://192.168.1.13:3000/api/horse/${route.params.caballoId}`);
         setHorseData(response.data);
       } catch (error) {
         console.error('Error al obtener los datos del caballo:', error);
@@ -40,6 +42,15 @@ const ParametrosScreen = ({ route }) => {
       { cancelable: false }
     );
   };
+
+  // const chequeo = () => {
+  //   navigation.navigate('Chequeo');
+  // };
+
+  const chequeo = () => {
+    navigation.navigate('Chequeo', { nombreCaballo: horseData ? horseData.name : "Nombre del Caballo" });
+  };
+  
 
   return (
     <View style={styles.container}>
@@ -88,6 +99,13 @@ const ParametrosScreen = ({ route }) => {
         >
             <Text style={styles.textBtnUbicacion}>Ver Info</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+                        style={styles.btnUbicacion}
+                        onPress={chequeo}
+                    >
+                        <Text style={styles.textBtnUbicacion}>Chequeo</Text>
+                    </TouchableOpacity>
       </View>
 
       {showInfo && (
