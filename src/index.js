@@ -27,7 +27,7 @@ app.use('/api', checkRoute);
 
 
 mongoose.connect(process.env.MONGODB_URI)
-.then(() => console.log('si se conecto la bd we'))
+.then(() => console.log('La base de datos se ha conectado correctamente'))
 .catch ((error) => console.error(error));
 
 app.listen(port, () => console.log('El servidor está escuchando en el puerto', port));
