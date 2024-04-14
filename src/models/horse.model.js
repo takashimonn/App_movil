@@ -5,7 +5,6 @@ const horseSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    // unique: true,
   },
   age: {
     type: String,

@@ -5,7 +5,6 @@ const checkSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        // unique: true,
     },
     medicines: {
         type: String, 
@@ -30,3 +29,5 @@ const checkSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("check", checkSchema);
+
+

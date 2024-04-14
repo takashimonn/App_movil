@@ -3,10 +3,8 @@ import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet, Alert 
 import { CheckBox } from 'react-native-elements';
 import axios from 'axios';
 
-const ChequeoScreen = ({ route }) => {
-  const { nombreCaballo } = route.params;
-
-  // const [nombre, setNombre] = useState('');
+const ChequeoScreen = () => {
+  const [nombre, setNombre] = useState('');
   const [medicinasSeleccionadas, setMedicinasSeleccionadas] = useState([]);
   const [especificaciones, setEspecificaciones] = useState('');
   const [alimento, setAlimento] = useState('');
@@ -24,33 +22,10 @@ const ChequeoScreen = ({ route }) => {
     }
   };
 
-  // const handleSubmit = () => {
-  //   axios.post('http://192.168.1.13:3000/api/checks',{
-  //     namehorse: nombreCaballo,
-  //     medicines: medicinasSeleccionadas.join(', '), // Convertir el array de medicinas a una cadena separada por comas
-  //     specifications: especificaciones,
-  //     food: alimento,
-  //     horseshoes: herraje,
-  //     job: job
-  //   })
-  //   .then(response => {
-  //     console.log('Caballo agregado:', response.data);
-  //     Alert.alert('Registro exitoso'); 
-  //   })
-  //   .catch(error => {
-  //     console.error('Error al agregar el caballo:', error);
-  //   });
-  // };
   const handleSubmit = () => {
-    // Verificar si nombreCaballo tiene un valor
-    if (!nombreCaballo || nombreCaballo.trim() === '') {
-      Alert.alert('Error', 'El nombre del caballo es requerido');
-      return;
-    }
-  
-    axios.post('http://192.168.1.13:3000/api/checks',{
-      namehorse: nombreCaballo,
-      medicines: medicinasSeleccionadas.join(', '), // Convertir el array de medicinas a una cadena separada por comas
+    axios.post('http://192.168.1.11:3000/api/checks',{
+      namehorse: nombre,
+      medicines: medicinasSeleccionadas.join(', '), 
       specifications: especificaciones,
       food: alimento,
       horseshoes: herraje,
@@ -64,22 +39,20 @@ const ChequeoScreen = ({ route }) => {
       console.error('Error al agregar el caballo:', error);
     });
   };
-  
+
 
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
-      <Text style={styles.title}>Chequeo para {nombreCaballo}</Text>
-
         <View style={styles.formulario}>
-          {/* <Text>1.- Ingresa el Nombre del caballo correpondiente</Text>
+          <Text>1.- Ingresa el Nombre del caballo correpondiente</Text>
 
           <Text style={styles.label}>Nombre del caballo:</Text>
           <TextInput
             style={styles.input}
             placeholder="Ingrese el nombre"
             onChangeText={text => setNombre(text)}
-          /> */}
+          /> 
 
           <Text>2.- Señala cual de estas opciones fue aplicada al caballo durante el día de hoy</Text>
 
