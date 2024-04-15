@@ -15,7 +15,7 @@ const NewVetsScreen = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post('http://172.20.97.136:3000/api/vets', vet);
+      const response = await axios.post('http://192.168.1.11:3000/api/vets', vet);
       console.log(response.data); 
       Alert.alert('Registro exitoso');
 

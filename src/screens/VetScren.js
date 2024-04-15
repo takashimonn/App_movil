@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Platform, Alert, TextInput } from 'react-native';
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  TouchableOpacity, 
+  Platform, 
+  Alert, 
+  TextInput 
+} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign'; 
 import axios from 'axios';
 
@@ -8,6 +16,7 @@ const VetScreen = () => {
   const [showButtons, setShowButtons] = useState({});
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [updateFormData, setUpdateFormData] = useState({
+    _id: "",
     firstName: "",
     lastName: "",
     age: "",
@@ -18,7 +27,7 @@ const VetScreen = () => {
   useEffect(() => {
     const fetchVeterinarians = async () => {
       try {
-        const response = await axios.get('http://172.20.97.136:3000/api/vets');
+        const response = await axios.get('http://192.168.1.11:3000/api/vets');
         setVeterinarians(response.data);
       } catch (error) {
         console.error("Error al obtener los veterinarios:", error);
@@ -50,8 +59,7 @@ const VetScreen = () => {
 
   const deleteVet = async (vetId) => {
     try {
-      await axios.delete(`http://172.20.97.136:3000/api/vets/${vetId}`);
-      // Actualizar la lista de veterinarios después de eliminar
+      await axios.delete(`http://192.168.1.11:3000/api/vets/${vetId}`);
       const updatedVets = veterinarians.filter(vet => vet._id !== vetId);
       setVeterinarians(updatedVets);
     } catch (error) {
@@ -59,7 +67,15 @@ const VetScreen = () => {
     }
   };
 
-  const handleUpdatePress = () => {
+  const handleUpdatePress = (vet) => {
+    setUpdateFormData({
+      _id: vet._id,
+      firstName: vet.firstName || "",
+      lastName: vet.lastName || "",
+      age: vet.age ? vet.age.toString() : "",
+      email: vet.email || "",
+      phone: vet.phone ? vet.phone.toString() : ""
+    });
     setShowUpdateForm(true);
   };
 
@@ -73,13 +89,14 @@ const VetScreen = () => {
   const handleSubmitUpdate = async () => {
     try {
       const { _id, ...updateData } = updateFormData;
-      await axios.put(`http://172.20.97.136:3000/api/vets/${_id}`, updateData);
-      // Actualizar la lista de veterinarios después de actualizar
-      const response = await axios.get('http://172.20.97.136:3000/api/vets');
+      await axios.put(`http://192.168.1.11:3000/api/vets/${_id}`, updateData);
+      
+      const response = await axios.get('http://192.168.1.11:3000/api/vets');
       setVeterinarians(response.data);
 
       Alert.alert(
-        "Se me hace que ya se armo la machaca hermana",
+        "Actualización exitosa",
+        "Los datos del veterinario han sido actualizados exitosamente."
       );
 
       setShowUpdateForm(false);
@@ -105,8 +122,10 @@ const VetScreen = () => {
               <TouchableOpacity style={styles.button} onPress={() => confirmDelete(vet._id)}>
                 <Text style={styles.text_btn}>Eliminar</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.button, styles.updateButton]} onPress={handleUpdatePress}>
-                <Text style={styles.text_btn}>Actualizar</Text>
+              <TouchableOpacity 
+                style={[styles.button, styles.updateButton]} 
+                onPress={() => handleUpdatePress(vet)}>
+                  <Text style={styles.text_btn}>Actualizar</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -125,30 +144,35 @@ const VetScreen = () => {
               style={styles.input}
               placeholder="Ingrese el nombre"
               onChangeText={text => handleChange("firstName", text)}
+              value={updateFormData.firstName}
             />
             <Text style={styles.label}>Apellido:</Text>
             <TextInput
               style={styles.input}
               placeholder="Ingrese el apellido"
               onChangeText={text => handleChange("lastName", text)}
+              value={updateFormData.lastName}
             />
             <Text style={styles.label}>Edad:</Text>
             <TextInput
               style={styles.input}
               placeholder="Ingrese la edad"
               onChangeText={text => handleChange("age", text)}
+              value={updateFormData.age}
             />
             <Text style={styles.label}>Correo:</Text>
             <TextInput
               style={styles.input}
               placeholder="Ingrese el correo"
               onChangeText={text => handleChange("email", text)}
+              value={updateFormData.email}
             />
             <Text style={styles.label}>Telefono:</Text>
             <TextInput
               style={styles.input}
               placeholder="Ingrese el Telefono"
               onChangeText={text => handleChange("phone", text)}
+              value={updateFormData.phone}
             />
             <TouchableOpacity style={styles.updateBoton} onPress={handleSubmitUpdate}>
               <Text style={styles.textoBoton}>Actualizar</Text>
@@ -159,6 +183,7 @@ const VetScreen = () => {
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
