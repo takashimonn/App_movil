@@ -1,14 +1,77 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Image, StyleSheet, Text } from 'react-native';
+import axios from 'axios';
 
-function PerfilScreen() {
+const PerfilScreen = () => {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('http://192.168.1.11:3000/api/user');
+        setUserData(response.data);
+      } catch (error) {
+        console.error("Error al obtener los datos del usuario:", error);
+      }
+    };
+    fetchUserData();
+  }, []);
+
   return (
-    <View>
-        <Text>
-            Aqui va el perfil del usuario mamichulis
-        </Text>
+    <View style={styles.container}>
+      <View style={styles.circulo}>
+        <Image 
+          source={require('../../assets/granja.jpg')}
+          style={styles.imagen}
+          resizeMode='cover'
+        /> 
+      </View>
+      {userData && (
+        <View style={styles.userData}>
+          <Text style={styles.label}>Nombre de usuario:</Text>
+          <Text style={styles.text}>{userData.username}</Text>
+          <Text style={styles.label}>Nombre:</Text>
+          <Text style={styles.text}>{userData.name}</Text>
+          <Text style={styles.label}>Email:</Text>
+          <Text style={styles.text}>{userData.email}</Text>
+        </View>
+      )}
     </View>
   )
 }
 
-export default PerfilScreen
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+  },
+  circulo: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: 'gray',
+    overflow: 'hidden',
+    marginBottom: 20,
+  },
+  imagen: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  userData: {
+    alignItems: 'center',
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  text: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+});
+
+export default PerfilScreen;

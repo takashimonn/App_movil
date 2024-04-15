@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  TouchableOpacity, 
-  Platform, 
-  Alert, 
-  TextInput 
-} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform, Alert, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign'; 
 import axios from 'axios';
 
