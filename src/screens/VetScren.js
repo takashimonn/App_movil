@@ -19,7 +19,7 @@ const VetScreen = () => {
   useEffect(() => {
     const fetchVeterinarians = async () => {
       try {
-        const response = await axios.get('http://192.168.1.11:3000/api/vets');
+        const response = await axios.get('http://172.20.99.75:3000/api/vets');
         setVeterinarians(response.data);
       } catch (error) {
         console.error("Error al obtener los veterinarios:", error);
@@ -51,7 +51,7 @@ const VetScreen = () => {
 
   const deleteVet = async (vetId) => {
     try {
-      await axios.delete(`http://192.168.1.11:3000/api/vets/${vetId}`);
+      await axios.delete(`http://172.20.99.75:3000/api/vets/${vetId}`);
       const updatedVets = veterinarians.filter(vet => vet._id !== vetId);
       setVeterinarians(updatedVets);
     } catch (error) {
@@ -81,9 +81,9 @@ const VetScreen = () => {
   const handleSubmitUpdate = async () => {
     try {
       const { _id, ...updateData } = updateFormData;
-      await axios.put(`http://192.168.1.11:3000/api/vets/${_id}`, updateData);
+      await axios.put(`http://172.20.99.75:3000/api/vets/${_id}`, updateData);
       
-      const response = await axios.get('http://192.168.1.11:3000/api/vets');
+      const response = await axios.get('http://172.20.99.75:3000/api/vets');
       setVeterinarians(response.data);
 
       Alert.alert(

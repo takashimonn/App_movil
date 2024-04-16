@@ -11,7 +11,7 @@ const ParametrosScreen = ({ route }) => {
   useEffect(() => {
     const fetchHorseData = async () => {
       try {
-        const response = await axios.get(`http://192.168.1.13:3000/api/horse/${route.params.caballoId}`);
+        const response = await axios.get(`http://192.168.1.11:3000/api/horse/${route.params.caballoId}`);
         setHorseData(response.data);
       } catch (error) {
         console.error('Error al obtener los datos del caballo:', error);
@@ -43,12 +43,10 @@ const ParametrosScreen = ({ route }) => {
     );
   };
 
-  // const chequeo = () => {
-  //   navigation.navigate('Chequeo');
-  // };
 
   const chequeo = () => {
-    navigation.navigate('Chequeo', { nombreCaballo: horseData ? horseData.name : "Nombre del Caballo" });
+    navigation.navigate('Chequeo', { caballoNombre: horseData ? horseData.name : "Nombre del Caballo" });
+
   };
   
 

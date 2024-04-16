@@ -28,6 +28,7 @@ const InicioScreen = ({ navigation }) => {
                             navigation.navigate('Parametros', { caballoId: caballo._id });
                         }}
                     >
+
                         <Text style={styles.textBtnHorseName}>{caballo.name}</Text>
                     </TouchableOpacity>
                 </View>
