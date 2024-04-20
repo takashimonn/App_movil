@@ -10,14 +10,11 @@ import VetScren from '../screens/VetScren';
 import NewVetsScreen from '../screens/NewVetsScreen';
 import BienvenidaScreen from '../screens/BienvenidaScreen';
 import { Button, Icon } from 'react-native-elements';
-
 import { Ionicons } from '@expo/vector-icons';
-
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-
-
 
 function InicioStack() {
   return (
@@ -66,18 +63,8 @@ export default function TabNavigation() {
             component={InicioStack} 
             options={{ 
               headerShown: false,
-              tabBarIcon: () => <Ionicons name="home-outline" size={24} color="black" /> 
+              tabBarIcon: () => <MaterialCommunityIcons name="horse" size={24} color="black" /> 
                 }}  />
-
-        {/* <Tab.Screen 
-            name="Chequeo" 
-            component={ChequeoScreen} 
-            options={{ 
-              headerShown: true, headerTitle: 'Chequeo Rutinario',
-              tabBarIcon: () => <Ionicons name="clipboard-outline" size={24} color="black" /> 
-            }} 
-        /> */}
-
           <Tab.Screen
             name="Veterinarios"
             component={VetScren}

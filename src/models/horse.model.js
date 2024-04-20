@@ -20,6 +20,10 @@ const horseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  imagePath: {
+    type: String,  // Almacenará la ruta de la imagen
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Horse", horseSchema);

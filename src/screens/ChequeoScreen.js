@@ -24,7 +24,7 @@ const ChequeoScreen = ({ route }) => {
   };
 
   const handleSubmit = () => {
-      axios.post('http://192.168.1.11:3000/api/checks', {
+      axios.post('http://172.20.99.113:3000/api/checks', {
           namehorse: nombre,
           medicines: medicinasSeleccionadas.join(', '),
           specifications: especificaciones,

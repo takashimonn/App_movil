@@ -1,180 +1,265 @@
+// Login con logo blanco y boton azul 
+// import React, { useState } from 'react';
+// import { StyleSheet, View, ImageBackground, Image, Text, TextInput, TouchableOpacity } from 'react-native';
+// import { useNavigation } from '@react-navigation/native';
+// import Icon from 'react-native-vector-icons/FontAwesome';
+
+// const LoginScreen = () => {
+//   const navigation = useNavigation();
+//   const [username, setUsername] = useState('');
+//   const [password, setPassword] = useState('');
+
+//   const handleLogin = () => {
+//     navigation.navigate('TabNavigation');
+//   };
+
+//   return (
+//     <View style={styles.container}>
+//       <ImageBackground 
+//         source={require('../../assets/caballo_login.jpg')} 
+//         style={styles.background}
+//         opacity={0.8}
+//         blurRadius={5}
+//       >
+//         <View style={styles.content}>
+//           <Image source={require('../../assets/logo_blanco_trans.png')} style={styles.logo} />
+//           <View style={styles.containerInput}>
+//             <View style={styles.form}>
+//               <View style={styles.inputContainer}>
+//                 <Icon name="user" size={24} color="#FFF" style={styles.icon} />
+//                 <TextInput
+//                   style={styles.input}
+//                   placeholder="Nombre de usuario"
+//                   placeholderTextColor="#FFF"
+//                   onChangeText={setUsername}
+//                   value={username}
+//                 />
+//               </View>
+//               <View style={styles.inputContainer}>
+//                 <Icon name="lock" size={24} color="#FFF" style={styles.icon} />
+//                 <TextInput
+//                   style={styles.input}
+//                   placeholder="Contraseña"
+//                   placeholderTextColor="#FFF"
+//                   secureTextEntry
+//                   onChangeText={setPassword}
+//                   value={password}
+//                 />
+//               </View>
+//               <TouchableOpacity style={styles.button} onPress={handleLogin}>
+//                 <Text style={styles.buttonText}>Continuar</Text>
+//               </TouchableOpacity>
+//             </View>
+//           </View>
+//         </View>
+//       </ImageBackground>
+//     </View>
+//   );
+// };
+
+// const styles = StyleSheet.create({ 
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   background: {
+//     flex: 1,
+//     resizeMode: 'cover',
+//     justifyContent: 'center',
+//     width: '100%',
+//   },
+//   content: {
+//     flex: 1,
+//     alignItems: 'center',
+//   },
+//   logo: {
+//     width: 200,
+//     height: 170,
+//     marginBottom: 120,
+//     marginTop: 180,
+//   },
+//   containerInput: {
+//     width: '90%',
+//     backgroundColor: 'transparent',
+//     borderRadius: 10,
+//     alignItems: 'center',
+//     paddingVertical: 30,
+//   },
+//   form: {
+//     width: '100%',
+//     marginTop: 10,
+//   },
+//   inputContainer: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     marginBottom: 20,
+//   },
+//   input: {
+//     flex: 1,
+//     borderWidth: 2,
+//     borderColor: '#FFF',
+//     borderRadius: 25,
+//     padding: 10,
+//     paddingLeft: 40, 
+//     color: '#FFF',
+//     fontSize: 18, 
+//   },
+//   icon: {
+//     position: 'absolute', 
+//     top: 15,
+//     left: 15,
+//   },
+//   button: {
+//     backgroundColor: '#21AEF9',
+//     padding: 10,
+//     borderRadius: 25,
+//     width: '100%',
+//     height: 50,
+//     alignItems: 'center',
+//     marginTop: 10,
+//     justifyContent: 'center',
+//     borderWidth: 2,
+//     borderColor: '#21AEF9',
+//   },
+//   buttonText: {
+//     color: '#FFF',
+//     fontWeight: 'bold',
+//     fontSize: 18,
+//   },
+// });
+
+// export default LoginScreen;
+
+// Login con logo azul y boton blanco
+
 import React, { useState } from 'react';
+import { StyleSheet, View, ImageBackground, Image, Text, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
-// // import axios from 'axios'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-//   // const handleLogin = async () => {
-//     // try {
-//     //   const response = await axios('http://localhost:3000/api/login', {
-//     //     method: 'POST',
-//     //     headers: {
-//     //       'Content-Type': 'application/json',
-//     //     },
-//     //     body: JSON.stringify({
-//     //       username: username, 
-//     //       password: password, 
-//     //     }),
-//     //   });
-
-//     //   const data = await response.json();
-
-//     //   if (!response.ok) {
-//     //     throw new Error(data.message);
-//     //   }
-
-//     //   // Mostrar alerta de inicio de sesión exitoso
-//     //   Alert.alert('Bienvenido', `¡Hola ${data.username}!`);
-//     //   navigation.navigate('InicioScreen');
-//     // } catch (error) {
-//     //   console.error('Error al iniciar sesión:', error.message);
-      
-//     //   // Mostrar alerta de error de inicio de sesión
-//     //   Alert.alert('Error', error.message);
-//     // }
-     
-
-//   // };
   const handleLogin = () => {
     navigation.navigate('TabNavigation');
   };
 
-
-  
-  const handleRegister = () => {
-    navigation.navigate('RegisterScreen'); 
-  };
-
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/granja.jpg')} style={styles.logo} />
-      <Text style={styles.texto}> Inicia Sesión </Text>
-      <View style={styles.containerBlue}>
-        <View style={styles.form}>
-          <TextInput
-            style={styles.input}
-            placeholder="Nombre de usuario"
-            placeholderTextColor="#000"
-            onChangeText={setUsername}
-            value={username}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Contraseña"
-            placeholderTextColor="#000"
-            secureTextEntry
-            onChangeText={setPassword}
-            value={password}
-          />
-        </View>
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Continuar</Text>
-        </TouchableOpacity>
-
-        <View style={styles.registerContainer}>
-          <Text style={styles.registerText}>¿Aún no tienes una cuenta?</Text>
-          <Text style={styles.link} onPress={handleRegister}>Registrarse</Text>
-        </View>
-          </View>
+      <ImageBackground 
+        source={require('../../assets/caballo_login.jpg')} 
+        style={styles.background}
+        opacity={0.8}
+        blurRadius={5}
+      >
+        <View style={styles.content}>
+          <Image source={require('../../assets/logo_azul-removebg-preview.png')} style={styles.logo} />
+          <View style={styles.containerInput}>
+            <View style={styles.form}>
+              <View style={styles.inputContainer}>
+                <Icon name="user" size={24} color="#FFF" style={styles.icon} />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Nombre de usuario"
+                  placeholderTextColor="#FFF"
+                  onChangeText={setUsername}
+                  value={username}
+                />
+              </View>
+              <View style={styles.inputContainer}>
+                <Icon name="lock" size={24} color="#FFF" style={styles.icon} />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Contraseña"
+                  placeholderTextColor="#FFF"
+                  secureTextEntry
+                  onChangeText={setPassword}
+                  value={password}
+                />
+              </View>
+              <TouchableOpacity style={styles.button} onPress={handleLogin}>
+                <Text style={styles.buttonText}>Continuar</Text>
+              </TouchableOpacity>
             </View>
-       
-
+          </View>
+        </View>
+      </ImageBackground>
+    </View>
   );
-  };
+};
+
 const styles = StyleSheet.create({ 
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFF',
   },
-  containerBlue: {
-    width: '80%',
-    backgroundColor: '#FFF',
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  content: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  logo: {
+    width: 200,
+    height: 170,
+    marginBottom: 120,
+    marginTop: 180,
+  },
+  containerInput: {
+    width: '90%',
+    backgroundColor: 'transparent',
     borderRadius: 10,
     alignItems: 'center',
     paddingVertical: 30,
   },
-  texto: {
-    fontSize: 40,
-    marginBottom: 30,
-    fontWeight: 'bold',
-    marginTop: 10,
-    // fontFamily: 'Pacifico', 
-  },
   form: {
-    width: '90%',
+    width: '100%',
     marginTop: 10,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#000',
-    borderRadius: 5,
+    flex: 1,
+    borderWidth: 2,
+    borderColor: '#FFF',
+    borderRadius: 25,
     padding: 10,
-    marginBottom: 10,
+    paddingLeft: 40, 
+    color: '#FFF',
+    fontSize: 18, 
+  },
+  icon: {
+    position: 'absolute', 
+    top: 15,
+    left: 15,
   },
   button: {
-    backgroundColor: '#21AEF9',
+    backgroundColor: '#FFF',
     padding: 10,
-    borderRadius: 5,
-    width: '90%',
+    borderRadius: 25,
+    width: '100%',
     height: 50,
     alignItems: 'center',
-    marginTop: 20,
-    alignItems: 'center',
+    marginTop: 10,
     justifyContent: 'center',
+    borderWidth: 2,
+    borderColor: '#FFF',
   },
   buttonText: {
-    color: 'white',
+    color: '#21AEF9',
     fontWeight: 'bold',
     fontSize: 18,
-  },
-  logo: {
-    width: 150,
-    height: 150,
-    marginBottom: 40,
-  },
-  textRegistro: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginTop: 20,
-    color: 'black',
-  },
-  link: {
-    color: '#5D62D5',
-    fontSize: 18,
-    textDecorationLine: 'underline',
-  },
-  buttonRegistro: {
-    width: 100,
-    height: 40,
-    borderWidth: 1,
-    borderColor: '#9393A7',
-    borderRadius: 5,
-    marginRight: 20, 
-    marginLeft: 20
-  },
-  imagenRegistro: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'contain',
-  },
-  contRegistro: {
-    flexDirection: 'row', 
-    marginTop: 40, 
-  },
-  registerContainer: {
-    flexDirection: 'row',
-    marginTop: 40,
-    alignItems: 'center',
-  },
-  registerText: {
-    marginRight: 10,
-    fontSize: 16,
   },
 });
 
