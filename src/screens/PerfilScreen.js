@@ -21,7 +21,7 @@ const PerfilScreen = () => {
     <View style={styles.container}>
       <View style={styles.circulo}>
         <Image 
-          source={require('../../assets/granja.jpg')}
+          source={require('../../assets/logo_transparente-removebg-preview.png')}
           style={styles.imagen}
           resizeMode='cover'
         /> 

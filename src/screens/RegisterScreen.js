@@ -28,7 +28,7 @@ const RegisterScreen = () => {
     <View style={styles.container}>
       <View style={styles.contPrin}>
         <View style={styles.formContainer}>
-          <Image source={require('../../assets/logo-niño-trans.png')} style={styles.logo} />
+          <Image source={require('../../assets/logo-niño-trans-removebg.png')} style={styles.logo} />
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Username:</Text>
             <TextInput

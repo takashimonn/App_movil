@@ -133,15 +133,17 @@
 
 // Login con logo azul y boton blanco
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, View, ImageBackground, Image, Text, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { AuthContext } from '../context/AuthContext';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const val = useContext(AuthContext);
 
   const handleLogin = () => {
     navigation.navigate('TabNavigation');
@@ -158,6 +160,7 @@ const LoginScreen = () => {
         <View style={styles.content}>
           <Image source={require('../../assets/logo_azul-removebg-preview.png')} style={styles.logo} />
           <View style={styles.containerInput}>
+            <Text>{val}</Text>
             <View style={styles.form}>
               <View style={styles.inputContainer}>
                 <Icon name="user" size={24} color="#FFF" style={styles.icon} />
