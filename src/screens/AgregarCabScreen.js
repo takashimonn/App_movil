@@ -171,7 +171,7 @@ const AgregarCabScreen = () => {
       formData.append('breed', raza);
       formData.append('diseases', enfermedades);
 
-      const response = await axios.post('http://192.168.1.6:3000/api/horse', formData, {
+      const response = await axios.post('https://app-movil-lzm2.vercel.app/api/horse', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

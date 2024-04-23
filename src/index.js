@@ -19,13 +19,16 @@ app.use(
 )
 
 // middleware
+// reciba con json 
 app.use(express.json());
+
+// indicar las rutas que se utilizaran en toda la aplicacion global 
 app.use('/api', userRoute);
 app.use('/api', horseRoute);
 app.use('/api', VetsRoute);
 app.use('/api', checkRoute);
 
-
+// conexion a la base de datos 
 mongoose.connect(process.env.MONGODB_URI)
 .then(() => console.log('La base de datos se ha conectado correctamente'))
 .catch ((error) => console.error(error));

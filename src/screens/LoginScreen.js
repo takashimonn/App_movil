@@ -141,7 +141,7 @@ import { AuthContext } from '../context/AuthContext';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const val = useContext(AuthContext);
 
@@ -164,12 +164,13 @@ const LoginScreen = () => {
             <View style={styles.form}>
               <View style={styles.inputContainer}>
                 <Icon name="user" size={24} color="#FFF" style={styles.icon} />
+
                 <TextInput
                   style={styles.input}
                   placeholder="Nombre de usuario"
                   placeholderTextColor="#FFF"
-                  onChangeText={setUsername}
-                  value={username}
+                  onChangeText={text => setEmail(text)}
+                  value={email}
                 />
               </View>
               <View style={styles.inputContainer}>
@@ -179,7 +180,7 @@ const LoginScreen = () => {
                   placeholder="Contraseña"
                   placeholderTextColor="#FFF"
                   secureTextEntry
-                  onChangeText={setPassword}
+                  onChangeText={text => setPassword(text)}
                   value={password}
                 />
               </View>

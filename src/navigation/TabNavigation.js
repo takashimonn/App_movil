@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 function InicioStack() {
   return (
     <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="InicioStackScreen"
           component={InicioScreen}
           options={({ navigation }) => ({
@@ -39,7 +39,12 @@ function InicioStack() {
               />
             ),
           })}
-        /> 
+        />  */}
+        <Stack.Screen
+          name="InicioStackScreen"
+          component={InicioScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="Parametros" component={ParametrosScreen} options={{ headerShown: false }} />
         <Stack.Screen name="NewVets" component={NewVetsScreen} options={{ headerShown: true, headerTitle: 'Nuevo Veterinario'}}  />
         <Stack.Screen name="NuevoCab" component={AgregarCabScreen} options={{ headerShown: true, headerTitle: 'Nuevo Caballo'}} />

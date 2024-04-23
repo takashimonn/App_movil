@@ -8,7 +8,7 @@ const PerfilScreen = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get('http://192.168.1.11:3000/api/user');
+        const response = await axios.get('https://app-movil-lzm2.vercel.app/api/user');
         setUserData(response.data);
       } catch (error) {
         console.error("Error al obtener los datos del usuario:", error);

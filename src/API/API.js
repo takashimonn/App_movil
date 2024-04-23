@@ -1,5 +1,5 @@
 import axios from 'axios';
-const IP = "192.168.1.6"
+const IP = "192.168.1.16"
 
 export const registerVet = async (vet) => {
     const response = axios.post(`http://${IP}:3000/api/vets`, vet)

@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const ChequeoScreen = ({ route }) => {
   const { caballoNombre } = route.params;
+  // se declara el estado del componente como nulo
   const [nombre] = useState(caballoNombre || '');
   const [medicinasSeleccionadas, setMedicinasSeleccionadas] = useState([]);
   const [especificaciones, setEspecificaciones] = useState('');
@@ -25,6 +26,7 @@ const ChequeoScreen = ({ route }) => {
 
   const handleSubmit = () => {
       axios.post('http://172.20.99.113:3000/api/checks', {
+        // indicas los propiedades que vas a mandar 
           namehorse: nombre,
           medicines: medicinasSeleccionadas.join(', '),
           specifications: especificaciones,
