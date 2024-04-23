@@ -19,7 +19,7 @@ const VetScreen = () => {
   useEffect(() => {
     const fetchVeterinarians = async () => {
       try {
-        const response = await axios.get('http://172.20.99.75:3000/api/vets');
+        const response = await axios.get('https://app-movil-lzm2.vercel.app/api/vets');
         setVeterinarians(response.data);
       } catch (error) {
         console.error("Error al obtener los veterinarios:", error);
