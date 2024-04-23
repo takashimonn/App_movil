@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
 
 // create user
 router.post('/user', async (req, res) => {
-    const { username, name, email, password } = req.body;
+    const { username, name, email, password, typeUser } = req.body;
     
     try {
         // Encriptar la contraseña antes de guardarla
@@ -64,7 +64,8 @@ router.post('/user', async (req, res) => {
             username,
             name,
             email,
-            password: hashedPassword // Guardar la contraseña encriptada en la base de datos
+            password: hashedPassword,
+            typeUser // Guardar la contraseña encriptada en la base de datos
         });
         
         // Guardar el nuevo usuario en la base de datos
