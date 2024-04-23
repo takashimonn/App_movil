@@ -37,6 +37,12 @@ const PerfilScreen = ({ navigation }) => {
         <View style={styles.userData}>
           <Text style={styles.label}>Nombre de usuario:</Text>
           <Text style={styles.text}>{userData?.username}</Text>
+          <Text style={styles.label}>Nombre:</Text>
+          <Text style={styles.text}>{userData.name}</Text>
+          <Text style={styles.label}>Email:</Text>
+          <Text style={styles.text}>{userData.email}</Text>
+          <Text style={styles.label}>Tipo de usuario:</Text>
+          <Text style={styles.text}>{userData.typeUser}</Text>
         </View>
       )}
     </View>
