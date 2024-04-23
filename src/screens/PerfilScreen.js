@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, StyleSheet, Text } from 'react-native';
-import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
+// Importa SecureStore desde Expo
 
-const PerfilScreen = () => {
+const PerfilScreen = ({ navigation }) => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get('http://192.168.1.11:3000/api/user');
-        setUserData(response.data);
+        // Obtener los datos guardados de SecureStore
+        const storedData = await SecureStore.getItemAsync('userData');
+        if (storedData) {
+          const parsedData = JSON.parse(storedData);
+          setUserData(parsedData);
+        } else {
+          navigation.navigate('Login');
+        }
       } catch (error) {
         console.error("Error al obtener los datos del usuario:", error);
       }
@@ -29,11 +36,7 @@ const PerfilScreen = () => {
       {userData && (
         <View style={styles.userData}>
           <Text style={styles.label}>Nombre de usuario:</Text>
-          <Text style={styles.text}>{userData.username}</Text>
-          <Text style={styles.label}>Nombre:</Text>
-          <Text style={styles.text}>{userData.name}</Text>
-          <Text style={styles.label}>Email:</Text>
-          <Text style={styles.text}>{userData.email}</Text>
+          <Text style={styles.text}>{userData?.username}</Text>
         </View>
       )}
     </View>

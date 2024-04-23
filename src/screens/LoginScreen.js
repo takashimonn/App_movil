@@ -134,12 +134,11 @@
 // Login con logo azul y boton blanco
 
 import React, { useContext, useState } from 'react';
-import { StyleSheet, View, ImageBackground, Image, Text, TextInput, TouchableOpacity } from 'react-native'; // Importa AsyncStorage
+import { StyleSheet, View, ImageBackground, Image, Text, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store'; // Importa SecureStore de Expo
 import { AuthContext } from '../context/AuthContext';
-
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -149,7 +148,6 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     try {
-      // Realiza la solicitud POST al servidor para iniciar sesión
       const response = await fetch('https://app-movil-lzm2.vercel.app/api/login', {
         method: 'POST',
         headers: {
@@ -161,10 +159,11 @@ const LoginScreen = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('Response data:', data);
-      
-        if (data.token) {
-          await AsyncStorage.setItem('token', data.token);
-          await AsyncStorage.setItem('userData', JSON.stringify(data.userData));
+  
+        if (data.token !== undefined) {
+          // Utiliza SecureStore para almacenar el token de forma segura
+          await SecureStore.setItemAsync('token', data.token);
+          await SecureStore.setItemAsync('userData', JSON.stringify(data.userData));
           signIn();
           navigation.navigate('TabNavigation');
           console.log('User data:', data.userData);
@@ -179,11 +178,11 @@ const LoginScreen = () => {
         console.error('Login failed:', errorData);
       }
     } catch (error) {
-      // Manejo de errores de red u otros errores
       console.error(error);
       alert('Error de red. Por favor, inténtalo de nuevo.');
     }
   };
+  
 
   return (
     <View style={styles.container}>
