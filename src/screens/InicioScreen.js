@@ -107,11 +107,17 @@ const InicioScreen = ({ navigation }) => {
     }, []);
 
 
+    const navigateToAddCaballo = () => {
+        navigation.navigate('NuevoCab');
+    }
+
 
     return (
         <View style={styles.container}>
             <View style={styles.blueContainer}>
                 <Text style={styles.textBlueCont}>Registro de caballos</Text>
+
+                </View>
                 <TouchableOpacity
                     onPress={() => navigation.navigate('NuevoCab')}
                     style={styles.addButton}
@@ -121,7 +127,7 @@ const InicioScreen = ({ navigation }) => {
 
 
 
-            </View>
+            
             <ScrollView style={styles.scrollView}>
                 <View style={styles.content}>
                     {caballos.map(caballo => (
@@ -192,6 +198,18 @@ const styles = StyleSheet.create({
         height: 120,
         borderRadius: 15,
         marginBottom: 10,
+    },
+    addButton: {
+        position: 'absolute',
+        bottom: 4,
+        right: 20,
+        backgroundColor: '#21AEF9',
+        borderRadius: 30,
+        width: 60,
+        height: 60,
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1,
     },
     textBtnHorseName: {
         color: '#333',
