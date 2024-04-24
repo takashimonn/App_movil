@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Platform, Alert, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign'; 
 import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
 const VetScreen = () => {
   const [veterinarians, setVeterinarians] = useState([]);
@@ -16,10 +17,17 @@ const VetScreen = () => {
     phone: ""
   });
 
+  
+
   useEffect(() => {
     const fetchVeterinarians = async () => {
       try {
-        const response = await axios.get('https://app-movil-lzm2.vercel.app/api/vets');
+        const token = await SecureStore.getItemAsync('token');
+        const response = await axios.get('https://app-movil-lzm2.vercel.app/api/vets', {
+          headers: {
+            'x-access-token': `${token}`
+        }
+        }) ;
         setVeterinarians(response.data);
       } catch (error) {
         console.error("Error al obtener los veterinarios:", error);
@@ -51,7 +59,11 @@ const VetScreen = () => {
 
   const deleteVet = async (vetId) => {
     try {
-      await axios.delete(`http://172.20.99.75:3000/api/vets/${vetId}`);
+      await axios.delete(`https://app-movil-lzm2.vercel.app/api/vets/${vetId}`, {
+        headers: {
+          'x-access-token': `${token}`
+      }
+      });
       const updatedVets = veterinarians.filter(vet => vet._id !== vetId);
       setVeterinarians(updatedVets);
     } catch (error) {
@@ -81,9 +93,17 @@ const VetScreen = () => {
   const handleSubmitUpdate = async () => {
     try {
       const { _id, ...updateData } = updateFormData;
-      await axios.put(`http://172.20.99.75:3000/api/vets/${_id}`, updateData);
+      await axios.put(`https://app-movil-lzm2.vercel.app/api/vets/${_id}`, updateData, {
+        headers: {
+          'x-access-token': `${token}`
+      }
+      });
       
-      const response = await axios.get('http://172.20.99.75:3000/api/vets');
+      const response = await axios.get('https://app-movil-lzm2.vercel.app/api/vets', {
+        headers: {
+          'x-access-token': `${token}`
+      }
+      });
       setVeterinarians(response.data);
 
       Alert.alert(
