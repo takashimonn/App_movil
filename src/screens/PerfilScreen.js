@@ -10,10 +10,6 @@ const PerfilScreen = ({ navigation }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-
-        const response = await axios.get('https://app-movil-lzm2.vercel.app/api/user');
-        setUserData(response.data);
-
         // Obtener los datos guardados de SecureStore
         const storedData = await SecureStore.getItemAsync('userData');
         if (storedData) {
@@ -28,6 +24,7 @@ const PerfilScreen = ({ navigation }) => {
     };
     fetchUserData();
   }, []);
+
 
   return (
     <View style={styles.container}>
