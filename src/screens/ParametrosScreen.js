@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import * as SecureStore from 'expo-secure-store';
 
 const ParametrosScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -10,8 +11,13 @@ const ParametrosScreen = ({ route }) => {
 
   useEffect(() => {
     const fetchHorseData = async () => {
+      const token = await SecureStore.getItemAsync('token');
       try {
-        const response = await axios.get(`http://172.20.99.113:3000/api/horse/${route.params.caballoId}`);
+        const response = await axios.get(`https://app-movil-lzm2.vercel.app/api/horse/${route.params.caballoId}`, {
+          headers: {
+            'x-access-token': `${token}`
+        }
+        });
         setHorseData(response.data);
       } catch (error) {
         console.error('Error al obtener los datos del caballo:', error);

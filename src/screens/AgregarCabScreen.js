@@ -113,6 +113,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image } fro
 import axios from 'axios';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
+import * as SecureStore from 'expo-secure-store';
 
 const AgregarCabScreen = () => {
   const [nombre, setNombre] = useState('');
@@ -161,19 +162,17 @@ const AgregarCabScreen = () => {
 
       // Enviar datos del caballo y ruta de la imagen al servidor
       const formData = new FormData();
-      formData.append('image', {
-        uri: rutaImagen,
-        type: 'image/jpeg',
-        name: nombreImagen,
-      });
       formData.append('name', nombre);
       formData.append('age', edad);
       formData.append('breed', raza);
       formData.append('diseases', enfermedades);
 
+      const token = await SecureStore.getItemAsync('token');
+
       const response = await axios.post('https://app-movil-lzm2.vercel.app/api/horse', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
+            'x-access-token': `${token}`
         },
       });
 
