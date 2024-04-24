@@ -27,6 +27,7 @@ const PerfilScreen = ({ navigation }) => {
     fetchUserData();
   }, []);
 
+
   return (
     <View style={styles.container}>
       <View style={styles.circulo}>
