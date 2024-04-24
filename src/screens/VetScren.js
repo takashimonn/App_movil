@@ -17,22 +17,22 @@ const VetScreen = () => {
     phone: ""
   });
 
-  
+  const fetchVeterinarians = async () => {
+    try {
+      const token = await SecureStore.getItemAsync('token');
+      const response = await axios.get('https://app-movil-lzm2.vercel.app/api/vets', {
+        headers: {
+          'x-access-token': `${token}`
+      }
+      }) ;
+      setVeterinarians(response.data);
+    } catch (error) {
+      console.error("Error al obtener los veterinarios:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchVeterinarians = async () => {
-      try {
-        const token = await SecureStore.getItemAsync('token');
-        const response = await axios.get('https://app-movil-lzm2.vercel.app/api/vets', {
-          headers: {
-            'x-access-token': `${token}`
-        }
-        }) ;
-        setVeterinarians(response.data);
-      } catch (error) {
-        console.error("Error al obtener los veterinarios:", error);
-      }
-    };
+    
     fetchVeterinarians();
   }, []);
 
@@ -59,6 +59,7 @@ const VetScreen = () => {
 
   const deleteVet = async (vetId) => {
     try {
+      const token = await SecureStore.getItemAsync('token');
       await axios.delete(`https://app-movil-lzm2.vercel.app/api/vets/${vetId}`, {
         headers: {
           'x-access-token': `${token}`
@@ -92,6 +93,7 @@ const VetScreen = () => {
 
   const handleSubmitUpdate = async () => {
     try {
+      const token = await SecureStore.getItemAsync('token');
       const { _id, ...updateData } = updateFormData;
       await axios.put(`https://app-movil-lzm2.vercel.app/api/vets/${_id}`, updateData, {
         headers: {
@@ -116,6 +118,9 @@ const VetScreen = () => {
       console.error("Error al actualizar el veterinario:", error);
     }
   };
+
+
+  fetchVeterinarians();
 
   return ( 
     <View style={styles.container}>
