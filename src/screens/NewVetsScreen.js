@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
-
+import * as SecureStore from 'expo-secure-store';
 const NewVetsScreen = () => {
   const [vet, setVet] = useState({
     firstName: "",
@@ -15,7 +15,12 @@ const NewVetsScreen = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post('http://192.168.1.11:3000/api/vets', vet);
+      const token = await SecureStore.getItemAsync('token');
+      const response = await axios.post('https://app-movil-lzm2.vercel.app/api/vets', vet, {
+        headers: {
+          'x-access-token': `${token}`
+      }
+      });
       console.log(response.data); 
       Alert.alert('Registro exitoso');
 
