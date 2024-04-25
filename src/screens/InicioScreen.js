@@ -148,9 +148,6 @@ const InicioScreen = ({ navigation }) => {
     </TouchableOpacity>
 )}
 
-
-            
-
             <ScrollView style={styles.scrollView}>
                 <View style={styles.content}>
                     {caballos.map(caballo => (

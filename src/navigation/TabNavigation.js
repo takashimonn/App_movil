@@ -49,6 +49,7 @@ function InicioStack() {
         <Stack.Screen name="NewVets" component={NewVetsScreen} options={{ headerShown: true, headerTitle: 'Nuevo Veterinario'}}  />
         <Stack.Screen name="NuevoCab" component={AgregarCabScreen} options={{ headerShown: true, headerTitle: 'Nuevo Caballo'}} />
         <Stack.Screen name="Chequeo" component={ChequeoScreen} options={{ headerShown: true, headerTitle: 'Chequeo Rutinario'}} />
+        <Stack.Screen name="vets" component={NewVetsScreen} options={{ headerShown: true, headerTitle: 'nuevo vet'}} />
     </Stack.Navigator>
   );
 }
@@ -73,22 +74,8 @@ export default function TabNavigation() {
           <Tab.Screen
             name="Veterinarios"
             component={VetScren}
-            options={({ navigation }) => ({
-              headerTitle: 'Veterinarios',
-              headerRight: () => (
-                <Button
-                  icon={
-                    <Icon
-                      name="add"
-                      size={30}
-                      color="black"
-                      style={{ marginRight: 20 }}
-                    />
-                  }
-                  onPress={() => navigation.navigate('NewVets')}
-                  buttonStyle={{ backgroundColor: 'transparent' }}
-                />
-              ),
+            options={({ 
+              headerShown: false, 
               tabBarIcon: ({ size }) => (
                 <Icon
                   name="bag-add-outline"
@@ -97,7 +84,25 @@ export default function TabNavigation() {
                   color="black"
                 />
               )
-            })}
+              
+             })
+              
+              // headerRight: () => (
+              //   <Button
+              //     icon={
+              //       <Icon
+              //         name="add"
+              //         size={30}
+              //         color="black"
+              //         style={{ marginRight: 20 }}
+              //       />
+              //     }
+              //     onPress={() => navigation.navigate('NewVets')}
+              //     buttonStyle={{ backgroundColor: 'transparent' }}
+              //   />
+              // ),
+ 
+            }
           />          
 
         <Tab.Screen

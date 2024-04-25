@@ -36,6 +36,7 @@ const NewVetsScreen = () => {
 
   return (
     <View style={styles.container}>
+
       <View style={styles.formulario}>
         <Text style={styles.label}>Nombre:</Text>
         <TextInput
@@ -82,6 +83,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 20,
   },
+
+
+
   circulo: {
     width: 100,
     height: 100,

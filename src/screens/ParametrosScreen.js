@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
 
   horseImage: {
     width: '20%',
-    height: '15%', // Ajusta la altura de la imagen según tus necesidades
+    height: '15%', 
     marginBottom: 20,
     borderRadius: 10,
   },
