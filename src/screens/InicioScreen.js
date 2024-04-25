@@ -104,7 +104,7 @@ const InicioScreen = ({ navigation }) => {
 
     useEffect(() => {
         getData();
-    }, []);
+    }, []); 
 
 
 
@@ -112,15 +112,6 @@ const InicioScreen = ({ navigation }) => {
         <View style={styles.container}>
             <View style={styles.blueContainer}>
                 <Text style={styles.textBlueCont}>Registro de caballos</Text>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('NuevoCab')}
-                    style={styles.addButton}
-                    > 
-                        <Ionicons name="add" size={30} color="white" />
-                </TouchableOpacity>
-
-
-
             </View>
             <ScrollView style={styles.scrollView}>
                 <View style={styles.content}>

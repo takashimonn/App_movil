@@ -134,7 +134,15 @@
 // Login con logo azul y boton blanco
 
 import React, { useContext, useState } from 'react';
-import { StyleSheet, View, ImageBackground, Image, Text, TextInput, TouchableOpacity } from 'react-native';
+import { 
+  StyleSheet, 
+  View, 
+  ImageBackground, 
+  Image, 
+  Text, 
+  TextInput, 
+  TouchableOpacity 
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as SecureStore from 'expo-secure-store'; // Importa SecureStore de Expo
@@ -203,10 +211,7 @@ const LoginScreen = () => {
                   style={styles.input}
                   placeholder="Correo electrónico"
                   placeholderTextColor="#FFF"
-
                   onChangeText={text => setEmail(text)}
-
-                  // onChangeText={setEmail}
                   value={email}
                 />
               </View>
