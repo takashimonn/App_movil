@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
   infoText: {
     marginBottom: 10,
     fontSize: 18
-  },
+  }, 
 
   closeText: {
     marginTop: 20,
