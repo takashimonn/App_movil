@@ -108,92 +108,45 @@
 
 // export default AgregarCabScreen;
 
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
-import * as ImagePicker from 'expo-image-picker';
-import * as FileSystem from 'expo-file-system';
+import * as SecureStore from 'expo-secure-store';
 
 const AgregarCabScreen = () => {
   const [nombre, setNombre] = useState('');
   const [edad, setEdad] = useState('');
   const [raza, setRaza] = useState('');
   const [enfermedades, setEnfermedades] = useState('');
-  const [imageUri, setImageUri] = useState(null);
-
-  useEffect(() => {
-    // Solicitar permisos para acceder a la galería
-    (async () => {
-      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (status !== 'granted') {
-        alert('Necesitamos acceso a la galería para seleccionar una imagen.');
-      }
-    })();
-  }, []);
-
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.cancelled) {
-      setImageUri(result.uri);
-    }
-  };
 
   const enviarDatos = async () => {
     try {
-      if (!imageUri) {
-        Alert.alert('Error', 'Por favor, selecciona una imagen.');
-        return;
-      }
+      const data = {
+        name: nombre,
+        age: edad,
+        breed: raza,
+        diseases: enfermedades,
+      };
 
-      const nombreImagen = Date.now() + '.jpg';
-      const rutaImagen = `${FileSystem.documentDirectory}${nombreImagen}`;
-
-      await FileSystem.moveAsync({
-        from: imageUri,
-        to: rutaImagen,
-      });
-
-      // Enviar datos del caballo y ruta de la imagen al servidor
-      const formData = new FormData();
-      formData.append('image', {
-        uri: rutaImagen,
-        type: 'image/jpeg',
-        name: nombreImagen,
-      });
-      formData.append('name', nombre);
-      formData.append('age', edad);
-      formData.append('breed', raza);
-      formData.append('diseases', enfermedades);
-
-      const response = await axios.post('https://app-movil-lzm2.vercel.app/api/horse', formData, {
+      const token = await SecureStore.getItemAsync('token');
+  
+      const response = await axios.post('https://app-movil-lzm2.vercel.app/api/horse', data, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
+            'x-access-token': `${token}`
         },
       });
-
+  
       console.log('Caballo agregado:', response.data);
-      Alert.alert('Registro exitoso');
+      Alert.alert('Registro exitoso'); 
     } catch (error) {
       console.error('Error al agregar el caballo:', error);
       Alert.alert('Error', 'Ocurrió un error al agregar el caballo.');
     }
   };
-
+  
   return (
     <View style={styles.container}>
-      <View style={styles.circulo}>
-        {imageUri && <Image source={{ uri: imageUri }} style={{ width: 100, height: 100, borderRadius: 50 }} />}
-      </View>
-      <TouchableOpacity style={styles.botonAgregar} onPress={pickImage}>
-        <Text style={styles.textoBoton}>Seleccionar Imagen</Text>
-      </TouchableOpacity>
-
       <View style={styles.formulario}>
         <Text style={styles.label}>Nombre:</Text>
         <TextInput
@@ -235,13 +188,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
-  },
-  circulo: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: 'gray',
-    marginBottom: 20,
   },
   formulario: {
     width: '100%',

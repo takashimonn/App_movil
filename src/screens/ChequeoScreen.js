@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, TextInput, Alert } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
 const ChequeoScreen = ({ route }) => {
   const { caballoNombre } = route.params;
@@ -24,25 +25,34 @@ const ChequeoScreen = ({ route }) => {
       }
   };
 
-  const handleSubmit = () => {
-      axios.post('http://172.20.99.113:3000/api/checks', {
-        // indicas los propiedades que vas a mandar 
+  const handleSubmit = async () => {
+    try {
+      const token = await SecureStore.getItemAsync('token');
+      const response = await axios.post(
+        'https://app-movil-lzm2.vercel.app/api/checks',
+        {
+          // indicas los propiedades que vas a mandar
           namehorse: nombre,
           medicines: medicinasSeleccionadas.join(', '),
           specifications: especificaciones,
           food: alimento,
           horseshoes: herraje,
-          job: job
-      })
-      .then(response => {
-          console.log('Caballo agregado:', response.data);
-          Alert.alert('Registro exitoso');
-      })
-      .catch(error => {
-          console.error('Error al agregar el caballo:', error);
-          Alert.alert('Error', 'Ocurrió un error al agregar el caballo');
-      });
+          job: job,
+        },
+        {   
+          headers: {
+            'x-access-token': `${token}`
+      }
+    }
+      );
+      console.log('Caballo agregado:', response.data);
+      Alert.alert('Registro exitoso');
+    } catch (error) {
+      console.error('Error al agregar el caballo:', error);
+      Alert.alert('Error', 'Ocurrió un error al agregar el caballo');
+    }
   };
+  
 
 return (
     <View style={styles.container}>

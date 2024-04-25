@@ -93,26 +93,64 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Image, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { getHorses } from "../API/API";
 import { Ionicons } from '@expo/vector-icons';
+import * as SecureStore from 'expo-secure-store';
 
 const InicioScreen = ({ navigation }) => {
     const [caballos, setCaballos] = useState([]);
+    const [userData, setUserData] = useState(null);
 
     const getData = async () => {
         const data = await getHorses();
         setCaballos(data);
     }
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // Obtener los datos guardados de SecureStore
+        const storedData = await SecureStore.getItemAsync('userData');
+        if (storedData) {
+          const parsedData = JSON.parse(storedData);
+          setUserData(parsedData);
+        } else {
+          navigation.navigate('Login');
+        }
+      } catch (error) {
+        console.error("Error al obtener los datos del usuario:", error);
+      }
+    };
+    fetchUserData();
+  }, []);
+
     useEffect(() => {
         getData();
     }, []); 
 
-
+    getData();
 
     return (
         <View style={styles.container}>
             <View style={styles.blueContainer}>
+
                 <Text style={styles.textBlueCont}>Registro de caballos</Text>
             </View>
+{/* 
+                <Text style={styles.textBlueCont}>Registro de caballos </Text>
+
+                </View> */}
+
+                {userData && (userData.typeUser === 'manager' || userData.typeUser === 'admin') && (
+    <TouchableOpacity
+        onPress={() => navigation.navigate('NuevoCab')}
+        style={styles.addButton}
+    >
+        <Ionicons name="add" size={30} color="white" />
+    </TouchableOpacity>
+)}
+
+
+            
+
             <ScrollView style={styles.scrollView}>
                 <View style={styles.content}>
                     {caballos.map(caballo => (
@@ -183,6 +221,18 @@ const styles = StyleSheet.create({
         height: 120,
         borderRadius: 15,
         marginBottom: 10,
+    },
+    addButton: {
+        position: 'absolute',
+        bottom: 4,
+        right: 20,
+        backgroundColor: '#21AEF9',
+        borderRadius: 30,
+        width: 60,
+        height: 60,
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1,
     },
     textBtnHorseName: {
         color: '#333',
