@@ -197,8 +197,6 @@ const VetScreen = ({navigation}) => {
     )}
   </TouchableOpacity>
 ))}
-
-        
       </View>
       </ScrollView>
 

@@ -47,7 +47,7 @@ function InicioStack() {
         />
         <Stack.Screen name="Parametros" component={ParametrosScreen} options={{ headerShown: false }} />
         <Stack.Screen name="NewVets" component={NewVetsScreen} options={{ headerShown: true, headerTitle: 'Nuevo Veterinario'}}  />
-        <Stack.Screen name="NuevoCab" component={AgregarCabScreen} options={{ headerShown: true, headerTitle: 'Nuevo Caballo'}} />
+        <Stack.Screen name="NuevoCab" component={AgregarCabScreen} options={{ headerShown: false}} />
         <Stack.Screen name="Chequeo" component={ChequeoScreen} options={{ headerShown: true, headerTitle: 'Chequeo Rutinario'}} />
         <Stack.Screen name="vets" component={NewVetsScreen} options={{ headerShown: true, headerTitle: 'nuevo vet'}} />
     </Stack.Navigator>

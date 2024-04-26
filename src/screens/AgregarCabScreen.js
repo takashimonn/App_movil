@@ -1,119 +1,10 @@
-// import React, { useState } from 'react';
-// import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-// import axios from 'axios';
-
-// const AgregarCabScreen = () => {
-//   const [nombre, setNombre] = useState('');
-//   const [edad, setEdad] = useState('');
-//   const [raza, setRaza] = useState('');
-//   const [enfermedades, setEnfermedades] = useState('');
-
-//   const enviarDatos = () => {
-//     axios.post('http://172.20.99.75:3000/api/horse', {
-//       name: nombre, 
-//       age: edad,
-//       breed: raza,
-//       diseases: enfermedades,
-//     })
-//     .then(response => {
-//       console.log('Caballo agregado:', response.data);
-//       Alert.alert('Registro exitoso'); 
-//     })
-//     .catch(error => {
-//       console.error('Error al agregar el caballo:', error);
-//     });
-//   };
-
-//   return (
-//     <View style={styles.container}>
-//       <View style={styles.circulo}></View>
-//       <View style={styles.formulario}>
-//         <Text style={styles.label}>Nombre:</Text>
-//         <TextInput
-//           style={styles.input}
-//           placeholder="Ingrese el nombre"
-//           onChangeText={text => setNombre(text)}
-//         />
-//         <Text style={styles.label}>Edad:</Text>
-//         <TextInput
-//           style={styles.input}
-//           placeholder="Ingrese la edad"
-//           keyboardType="numeric"
-//           onChangeText={text => setEdad(text)}
-//         />
-//         <Text style={styles.label}>Raza:</Text>
-//         <TextInput
-//           style={styles.input}
-//           placeholder="Ingrese la raza"
-//           onChangeText={text => setRaza(text)}
-//         />
-//         <Text style={styles.label}>Enfermedades:</Text>
-//         <TextInput
-//           style={styles.input}
-//           placeholder="Ingrese las enfermedades"
-//           onChangeText={text => setEnfermedades(text)}
-//         />
-//       </View>
-
-//       <TouchableOpacity style={styles.botonAgregar} onPress={enviarDatos}>
-//         <Text style={styles.textoBoton}>Agregar</Text>
-//       </TouchableOpacity>
-//     </View>
-//   )
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     paddingHorizontal: 20,
-//   },
-//   circulo: {
-//     width: 100,
-//     height: 100,
-//     borderRadius: 50,
-//     backgroundColor: 'gray',
-//     marginBottom: 20,
-  
-//   },
-//   formulario: {
-//     width: '100%',
-//     marginBottom: 20,
-//   },
-//   label: {
-//     fontSize: 16,
-//     marginBottom: 5,
-//   },
-//   input: {
-//     borderWidth: 1,
-//     borderColor: 'gray',
-//     borderRadius: 5,
-//     padding: 10,
-//     marginBottom: 10,
-//     width: '100%',
-//   },
-//   botonAgregar: {
-//     backgroundColor: '#21AEF9',
-//     paddingVertical: 10,
-//     paddingHorizontal: 20,
-//     borderRadius: 5,
-//   },
-//   textoBoton: {
-//     color: 'white',
-//     fontSize: 16,
-//     fontWeight: 'bold',
-//   },
-// });
-
-// export default AgregarCabScreen;
-
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground, Image } from 'react-native';
 import axios from 'axios';
+import { Ionicons } from '@expo/vector-icons';
 import * as SecureStore from 'expo-secure-store';
 
-const AgregarCabScreen = () => {
+const AgregarCabScreen = ({ navigation }) => {
   const [nombre, setNombre] = useState('');
   const [edad, setEdad] = useState('');
   const [raza, setRaza] = useState('');
@@ -133,7 +24,7 @@ const AgregarCabScreen = () => {
       const response = await axios.post('https://app-movil-lzm2.vercel.app/api/horse', data, {
         headers: {
           'Content-Type': 'application/json',
-            'x-access-token': `${token}`
+          'x-access-token': `${token}`
         },
       });
   
@@ -147,37 +38,70 @@ const AgregarCabScreen = () => {
   
   return (
     <View style={styles.container}>
-      <View style={styles.formulario}>
-        <Text style={styles.label}>Nombre:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Ingrese el nombre"
-          onChangeText={text => setNombre(text)}
-        />
-        <Text style={styles.label}>Edad:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Ingrese la edad"
-          keyboardType="numeric"
-          onChangeText={text => setEdad(text)}
-        />
-        <Text style={styles.label}>Raza:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Ingrese la raza"
-          onChangeText={text => setRaza(text)}
-        />
-        <Text style={styles.label}>Enfermedades:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Ingrese las enfermedades"
-          onChangeText={text => setEnfermedades(text)}
-        />
-      </View>
+      <ImageBackground source={require('../../assets/fondo_azul.jpeg')} style={styles.contBlue}>
+        <View style={styles.headerContent}>
+          <Text style={styles.textContBlue}>Nuevo Caballo</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('InicioStackScreen')}
+            style={styles.addButton}
+          >
+            <Ionicons name="arrow-back-circle-outline" size={50} color="white" />
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
 
-      <TouchableOpacity style={styles.botonAgregar} onPress={enviarDatos}>
-        <Text style={styles.textoBoton}>Agregar</Text>
-      </TouchableOpacity>
+      <View style={styles.contWhite}>
+        <View style={styles.formulario}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Nombre:</Text>
+            <View style={styles.input}>
+              <Image source={require('../../assets/horse.png')} style={styles.iconHorse} />
+              <TextInput
+                placeholder="Ingrese el nombre"
+                onChangeText={text => setNombre(text)}
+                style={styles.inputText}
+              />
+            </View>
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Edad:</Text>
+            <View style={styles.input}>
+              <Ionicons style={styles.iconInput} name="calendar-outline" size={24} color="black" />
+              <TextInput
+                placeholder="Ingrese la edad"
+                keyboardType="numeric"
+                onChangeText={text => setEdad(text)}
+                style={styles.inputText}
+              />
+            </View>
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Raza:</Text>
+            <View style={styles.input}>
+              <Image source={require('../../assets/type_horse.png')} style={styles.iconHorse} />
+              <TextInput
+                placeholder="Ingrese la raza"
+                onChangeText={text => setRaza(text)}
+                style={styles.inputText}
+              />
+            </View>
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Enfermedades:</Text>
+            <View style={styles.input}>
+              <Ionicons style={styles.iconInput} name="bandage-outline" size={24} color="black" />
+              <TextInput
+                placeholder="Ingrese las enfermedades"
+                onChangeText={text => setEnfermedades(text)}
+                style={styles.inputText}
+              />
+            </View>
+          </View>
+        </View>
+        <TouchableOpacity style={styles.botonAgregar} onPress={enviarDatos}>
+          <Text style={styles.textoBoton}>Agregar</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -187,35 +111,94 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    backgroundColor: 'white'
+  },
+  textContBlue: {
+    color: 'white',
+    fontSize: 34,
+    fontWeight: 'bold',
+    marginLeft: '5%',
+  },
+  contBlue: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '70%',
+    zIndex: 1, 
+  },
+  contWhite: {
+    position: 'absolute', 
+    top: '40%', 
+    width: '100%',
+    height: '80%', 
+    backgroundColor: 'white',
+    borderRadius: 20,
+    zIndex: 2, 
+    alignItems: 'center'
   },
   formulario: {
-    width: '100%',
+    width: '90%',
     marginBottom: 20,
+    marginTop: '10%',
+    alignItems: 'center'
   },
   label: {
     fontSize: 16,
     marginBottom: 5,
+    fontWeight: 'bold'
+  },
+  inputContainer: {
+    marginBottom: 10,
+    width: '90%',
   },
   input: {
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 5,
-    padding: 10,
     marginBottom: 10,
-    width: '100%',
+  },
+  inputText: {
+    flex: 1,
+    marginLeft: 10,
+    paddingVertical: 10,
+    fontSize: 16,
   },
   botonAgregar: {
     backgroundColor: '#21AEF9',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   textoBoton: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
   },
+  headerContent: {
+    flexDirection: 'row',        
+    justifyContent: 'space-between', 
+    alignItems: 'center',       
+    paddingHorizontal: '5%',    
+    height: '100%',   
+    marginTop: '-10%'          
+  },
+  icon: {
+    marginRight: 10,
+  },
+
+  iconInput:{
+    marginLeft: 10,
+  },
+
+  iconHorse: {
+    width: 32,
+    height: 32,
+    marginLeft: 10,
+
+  }
 });
 
 export default AgregarCabScreen;
