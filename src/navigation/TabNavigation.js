@@ -169,7 +169,7 @@ export default function TabNavigation() {
             options={({ 
               headerShown: false, 
               tabBarIcon: ({ size }) => (
-                <Image source={require('../../assets/usuario.png')} style={{ width: 20, height: 20ad }} />
+                <Image source={require('../../assets/usuario.png')} style={{ width: 20, height: 20 }} />
               )})
             }
         />
