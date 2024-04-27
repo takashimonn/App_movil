@@ -141,30 +141,6 @@ const VetScreen = ({navigation}) => {
 
       <ScrollView style={styles.scrollView}>
       <View style={styles.contTarjetas}>
-      {/* {veterinarians.map((vet, index) => (
-        <TouchableOpacity
-          key={vet._id}
-          style={[styles.card, Platform.OS === 'android' && styles.androidShadow]}
-          onPress={() => handleCardPress(index)}
-        >
-          <Text style={styles.text}>{vet.firstName} {vet.lastName}</Text>
-          <Text style={styles.text}>Edad: {vet.age}</Text>
-          <Text style={styles.text}>Email: {vet.email}</Text>
-          <Text style={styles.text}>Teléfono: {vet.phone}</Text>
-          {showButtons[index] && (
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.button} onPress={() => confirmDelete(vet._id)}>
-                <Text style={styles.text_btn}>Eliminar</Text>
-              </TouchableOpacity>
-              <TouchableOpacity 
-                style={[styles.button, styles.updateButton]} 
-                onPress={() => handleUpdatePress(vet)}>
-                  <Text style={styles.text_btn}>Actualizar</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </TouchableOpacity>
-      ))} */}
       {veterinarians.map((vet, index) => (
   <TouchableOpacity
     key={vet._id}
@@ -424,8 +400,10 @@ const styles = StyleSheet.create({
   },
 
   scrollView: {
-    width: '90%',  
-    marginBottom: 20 
+    width: '100%',  
+    backgroundColor: 'white',
+    borderRadius: 20,
+    marginTop: '-4%'
   },
 
   infoContainer: {
