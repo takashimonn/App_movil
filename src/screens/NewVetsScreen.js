@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground } from 'react-native';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
-const NewVetsScreen = () => {
+import { Ionicons } from '@expo/vector-icons';
+
+const NewVetsScreen = ({navigation}) => {
   const [vet, setVet] = useState({
     firstName: "",
     lastName: "",
@@ -15,9 +17,6 @@ const NewVetsScreen = () => {
 
   const handleRegister = async () => {
     try {
-
-      // const response = await axios.post('https://app-movil-lzm2.vercel.app/api/vets', vet);
-
       const token = await SecureStore.getItemAsync('token');
       const response = await axios.post('https://app-movil-lzm2.vercel.app/api/vets', vet, {
         headers: {
@@ -36,42 +35,84 @@ const NewVetsScreen = () => {
 
   return (
     <View style={styles.container}>
+      <ImageBackground source={require('../../assets/fondo_azul.jpeg')} style={styles.contBlue}>
+        <View style={styles.headerContent}>
+          <Text style={styles.textContBlue}>Nuevo Veterinario</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('vets')}
+            style={styles.addButton}
+          >
+            <Ionicons name="arrow-back-circle-outline" size={50} color="white" />
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
 
-      <View style={styles.formulario}>
-        <Text style={styles.label}>Nombre:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Ingrese el nombre"
-          onChangeText={text => handleChange("firstName", text)}
-        />
-        <Text style={styles.label}>Apellido:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Ingrese el apellido"
-          onChangeText={text => handleChange("lastName", text)}
-        />
-        <Text style={styles.label}>Edad:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Ingrese la edad"
-          onChangeText={text => handleChange("age", text)}
-        />
-        <Text style={styles.label}>Correo:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Ingrese el correo"
-          onChangeText={text => handleChange("email", text)}
-        />
-        <Text style={styles.label}>Telefono:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Ingrese el Telefono"
-          onChangeText={text => handleChange("phone", text)}
-        />
+      <View style={styles.contWhite}>
+        <View style={styles.formulario}>
+          <View style={styles.inputContainer}> 
+            <Text style={styles.label}>Nombre:</Text>
+              <View style={styles.input}>
+                <Ionicons style={styles.iconInput} name="person-outline" size={24} color="black" />
+                    <TextInput
+                      style={styles.inputText}
+                      placeholder="Ingrese el nombre"
+                      onChangeText={text => handleChange("firstName", text)}
+                    />
+              </View>
+            </View>
+       
+          <View style={styles.inputContainer}> 
+            <Text style={styles.label}>Apellido:</Text>
+              <View style={styles.input}>
+                <Ionicons style={styles.iconInput} name="person-outline" size={24} color="black" />
+                  <TextInput
+                    style={styles.inputText}
+                    placeholder="Ingrese el apellido"
+                    onChangeText={text => handleChange("lastName", text)}
+                  />
+            </View>
+          </View>
+
+          <View style={styles.inputContainer}> 
+            <Text style={styles.label}>Edad:</Text>
+              <View style={styles.input}>
+                <Ionicons style={styles.iconInput} name="today-outline" size={24} color="black" />
+                  <TextInput
+                    style={styles.inputText}
+                    placeholder="Ingrese la Edad"
+                    onChangeText={text => handleChange("age", text)}
+                  />
+            </View>
+          </View>
+
+          <View style={styles.inputContainer}> 
+            <Text style={styles.label}>Correo:</Text>
+              <View style={styles.input}>
+                <Ionicons style={styles.iconInput} name="mail-outline" size={24} color="black" />
+                  <TextInput
+                    style={styles.inputText}
+                    placeholder="Ingrese el Correo"
+                    onChangeText={text => handleChange("email", text)}
+                  />
+            </View>
+          </View>
+
+          <View style={styles.inputContainer}> 
+            <Text style={styles.label}>Teléfono:</Text>
+              <View style={styles.input}>
+                <Ionicons style={styles.iconInput} name="call-outline" size={24} color="black" />
+                  <TextInput
+                    style={styles.inputText}
+                    placeholder="Ingrese el Teléfono"
+                    onChangeText={text => handleChange("phone", text)}
+                  />
+            </View>
+          </View>
+        </View>
+          <TouchableOpacity style={styles.botonAgregar} onPress={handleRegister}>
+            <Text style={styles.textoBoton}>Agregar</Text>
+          </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.botonAgregar} onPress={handleRegister}>
-        <Text style={styles.textoBoton}>Agregar</Text>
-      </TouchableOpacity>
     </View>
   )
 }
@@ -81,44 +122,80 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 20,
   },
-
-
-
-  circulo: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: 'gray',
-    marginBottom: 20,
-  
+  contWhite: {
+    position: 'absolute', 
+    top: '30%', 
+    width: '100%',
+    height: '80%', 
+    backgroundColor: 'white',
+    borderRadius: 20,
+    zIndex: 2, 
+    alignItems: 'center'
   },
   formulario: {
-    width: '100%',
+    width: '90%',
     marginBottom: 20,
+    marginTop: '10%',
+    alignItems: 'center'
+  },
+  inputContainer: {
+    marginBottom: 10,
+    width: '90%',
   },
   label: {
     fontSize: 16,
     marginBottom: 5,
+    fontWeight: 'bold'
+  },
+  iconInput:{
+    marginLeft: 10,
+  },
+  inputText: {
+    flex: 1,
+    marginLeft: 10,
+    paddingVertical: 10,
+    fontSize: 16,
   },
   input: {
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 5,
-    padding: 10,
     marginBottom: 10,
+  },
+  textContBlue: {
+    color: 'white',
+    fontSize: 34,
+    fontWeight: 'bold',
+    marginLeft: '5%',
+  },
+  contBlue: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
     width: '100%',
+    height: '60%',
+    zIndex: 1, 
+  },
+  headerContent: {
+    flexDirection: 'row',        
+    justifyContent: 'space-between', 
+    alignItems: 'center',       
+    paddingHorizontal: '5%',    
+    height: '100%',   
+    marginTop: '-10%'          
   },
   botonAgregar: {
-    backgroundColor: 'green',
+    backgroundColor: '#21AEF9',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   textoBoton: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
   },
 });

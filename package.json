@@ -16,7 +16,7 @@
     "@react-navigation/drawer": "^6.6.7",
     "@react-navigation/native": "^6.1.14",
     "@react-navigation/native-stack": "^6.9.18",
-    "@react-navigation/stack": "^6.3.25",
+    "@react-navigation/stack": "^6.3.29",
     "async-storage": "^0.1.0",
     "axios": "^1.6.8",
     "cors": "^2.8.5",
