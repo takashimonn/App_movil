@@ -176,13 +176,11 @@ const VetScreen = ({navigation}) => {
       </View>
       </ScrollView>
 
-
-      
       {showUpdateForm && (
         <View style={styles.updateFormContainer}>
           <View style={styles.updateForm}>
             <TouchableOpacity style={styles.closeButton} onPress={() => setShowUpdateForm(false)}>
-              <Icon name="close" size={24} color="black" />
+              <Ionicons name="close" size={24} color="black" />
             </TouchableOpacity>
             <Text style={styles.textUpdate}>Actualización de Veterinarios</Text>
             <Text style={styles.label}>Nombre:</Text>

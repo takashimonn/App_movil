@@ -70,7 +70,7 @@ export default function TabNavigation() {
             name="Perfil"
             component={PerfilScreen}
             options={{
-              headerShown: true, headerTitle: 'Perfil',
+              headerShown: false,
               tabBarIcon: () => <Ionicons name="person-outline" size={24} color="black" />
 
             }}
