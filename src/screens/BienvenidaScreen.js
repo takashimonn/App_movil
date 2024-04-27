@@ -12,7 +12,7 @@
 
 // const SliderScreen = () => {
 //   const renderItem = ({ item }) => (
-//     <Image source={item} style={styles.image} resizeMode="cover" />
+//     <Image source={item} style={styles.image} resizeMode="contain" />
 //   );
 
 //   return (
@@ -32,16 +32,17 @@
 // const styles = StyleSheet.create({
 //   container: {
 //     flex: 1,
+//     backgroundColor: 'white'
 //   },
 //   image: {
-//     width: width,
-//     height: height,
+//     width: width,  
+//     height: height,  
 //   },
 // });
 
 // export default SliderScreen;
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Image, StyleSheet, FlatList, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
@@ -53,9 +54,19 @@ const images = [
   require('../../assets/slide04.png'),
 ];
 
+const backgroundColors = ['#F9E59E', '#FDF9DE', '#71E1BC', '#FDF9DE']; 
+
 const SliderScreen = () => {
-  const renderItem = ({ item }) => (
-    <Image source={item} style={styles.image} resizeMode="contain" />
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const onIndexChanged = (index) => {
+    setCurrentIndex(index);
+  };
+
+  const renderItem = ({ item, index }) => (
+    <View style={[styles.imageContainer, { backgroundColor: backgroundColors[index] }]}>
+      <Image source={item} style={styles.image} resizeMode="contain" />
+    </View>
   );
 
   return (
@@ -67,6 +78,11 @@ const SliderScreen = () => {
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
+        onScrollToIndexFailed={() => {}}
+        onMomentumScrollEnd={(event) => {
+          const index = Math.round(event.nativeEvent.contentOffset.x / width);
+          onIndexChanged(index);
+        }}
       />
     </View>
   );
@@ -75,12 +91,19 @@ const SliderScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white'
+  },
+  imageContainer: {
+    flex: 1,
+    width: width,
+    height: height,
+    
   },
   image: {
-    width: width,  // Utilizando las dimensiones de la pantalla
-    height: height,  // Utilizando las dimensiones de la pantalla
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain'
   },
 });
 
 export default SliderScreen;
-
