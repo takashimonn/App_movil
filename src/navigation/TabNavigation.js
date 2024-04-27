@@ -27,7 +27,7 @@ function InicioStack() {
         <Stack.Screen name="Parametros" component={ParametrosScreen} options={{ headerShown: false }} />
         <Stack.Screen name="NewVets" component={NewVetsScreen} options={{ headerShown: false}}  />
         <Stack.Screen name="NuevoCab" component={AgregarCabScreen} options={{ headerShown: false}} />
-        <Stack.Screen name="Chequeo" component={ChequeoScreen} options={{ headerShown: true, headerTitle: 'Chequeo Rutinario'}} />
+        <Stack.Screen name="Chequeo" component={ChequeoScreen} options={{ headerShown: false }} />
         <Stack.Screen name="vets" component={VetScren} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
@@ -48,7 +48,7 @@ export default function TabNavigation() {
             component={InicioStack} 
             options={{ 
               headerShown: false,
-              tabBarIcon: () => <MaterialCommunityIcons name="horse" size={24} color="black" /> 
+              tabBarIcon: () => <MaterialCommunityIcons name="horse" size={24} color="blue" /> 
                 }}  />
           <Tab.Screen
             name="Veterinarios"
