@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 const ParametrosScreen = ({ route }) => {
   const navigation = useNavigation();
+  const [userData, setUserData] = useState(null);
   const [horseData, setHorseData] = useState(null);
   const [showInfo, setShowInfo] = useState(false);
 
@@ -120,12 +121,14 @@ const ParametrosScreen = ({ route }) => {
             <Text style={styles.textBtnUbicacion}>Ver Info</Text>
           </TouchableOpacity>
 
+          {userData && (userData.typeUser === 'manager') && (
           <TouchableOpacity
             style={styles.btnInfo}
             onPress={chequeo}
           >
             <Text style={styles.textBtnUbicacion}>Chequeo</Text>
           </TouchableOpacity>
+          )}
         </View>
       </View>
 
