@@ -118,7 +118,7 @@
 // export default VerChequeos;
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, Image } from 'react-native';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 
@@ -171,12 +171,27 @@ const VerChequeos = ({ route }) => {
                     {chequeos.length > 0 ? (
                         chequeos.map((chequeo, index) => (
                             <View key={index} style={styles.chequeoContainer}>
-                                <Text>Medicinas: {chequeo.medicines}</Text>
-                                <Text>Especificaciones: {chequeo.specifications}</Text>
-                                <Text>Comida: {chequeo.food}</Text>
-                                <Text>Herraduras: {chequeo.horseshoes}</Text>
-                                <Text>Trabajo: {chequeo.job}</Text>
-                            </View>
+                                    <View style={styles.input}>
+                                        <Image source={require('../../assets/medicina.png')} style={styles.iconHorse} />
+                                        <Text style={styles.inputText}>Medicinas: {chequeo.medicines}</Text>
+                                    </View>
+                                    <View style={styles.input}>
+                                        <Image source={require('../../assets/especificaciones.png')} style={styles.iconHorse} />
+                                        <Text style={styles.inputText}>Especificaciones: {chequeo.specifications}</Text>
+                                    </View>
+                                    <View style={styles.input}>
+                                        <Image source={require('../../assets/comida.png')} style={styles.iconHorse} />
+                                        <Text style={styles.inputText}>Comida: {chequeo.food}</Text>
+                                    </View>
+                                    <View style={styles.input}>
+                                        <Image source={require('../../assets/herradura.png')} style={styles.iconHorse} />
+                                        <Text style={styles.inputText}>Herraduras: {chequeo.horseshoes}</Text>
+                                    </View>
+                                    <View style={styles.input}>
+                                        <Image source={require('../../assets/horas-laborales.png')} style={styles.iconHorse} />
+                                        <Text style={styles.inputText}>Trabajo: {chequeo.job}</Text>
+                                    </View>
+                                </View>
                         ))
                     ) : (
                         <Text>No hay chequeos para este caballo.</Text>
@@ -234,6 +249,21 @@ const styles = StyleSheet.create({
         width: '90%', 
         marginTop: '5%'
     },
+      input: {
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      iconHorse: {
+        width: 20,
+        height: 20,
+        marginLeft: 10,
+      },
+      inputText: {
+        flex: 1,
+        marginLeft: 10,
+        paddingVertical: 3,
+        fontSize: 16,
+      },
 });
 
 export default VerChequeos;
