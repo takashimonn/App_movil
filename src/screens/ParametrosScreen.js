@@ -29,6 +29,20 @@ const ParametrosScreen = ({ route }) => {
     fetchHorseData();
   }, [route.params.caballoId]);
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userDataString = await SecureStore.getItemAsync('userData');
+        const userData = JSON.parse(userDataString);
+        setUserData(userData);
+      } catch (error) {
+        console.error("Error al obtener los datos del usuario:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   const handleShowInfo = () => {
     setShowInfo(true);
   };
@@ -66,11 +80,7 @@ const ParametrosScreen = ({ route }) => {
         </TouchableOpacity>
       </View>
 
-      {/* Contenedores principal de parametros */}
-      {/* Contenedores principales de parámetros */}
       <View style={styles.parametrosContainer}>
-        {/* Contenedor 1 */}
-        {/* Contenedor 1 */}
         <View style={styles.vista1}>
           <Text style={styles.textvista1}>
             Luz Solar
@@ -83,8 +93,6 @@ const ParametrosScreen = ({ route }) => {
           </View>
         </View>
 
-        {/* Contenedor 2  */}
-        {/* Contenedor 2 */}
         <View style={styles.vista1}>
           <Text style={styles.textvista1}>
             Pulsos
@@ -97,8 +105,6 @@ const ParametrosScreen = ({ route }) => {
           </View>
         </View>
 
-        {/* Contenedor 3 */}
-        {/* Contenedor 3 */}
         <View style={styles.vista1}>
           <Text style={styles.textvista1}>
             Velocidad
@@ -111,8 +117,6 @@ const ParametrosScreen = ({ route }) => {
           </View>
         </View>
 
-        {/* Botones */}
-        {/* Botones */}
         <View style={styles.contBtn}>
           <TouchableOpacity
             style={styles.btnInfo}
@@ -132,11 +136,10 @@ const ParametrosScreen = ({ route }) => {
         </View>
       </View>
 
-      {/* Ventana que muestra los datos del caballo */}
       {showInfo && (
         <View style={styles.overlay}>
           <Image
-            source={require('../../assets/horse_alert-removebg-preview.png')} // Ajusta la ruta de la imagen
+            source={require('../../assets/horse_alert-removebg-preview.png')} 
             style={styles.horseImage}
             resizeMode="cover"
           />
@@ -153,9 +156,6 @@ const ParametrosScreen = ({ route }) => {
             <Text style={styles.infoText}>
               Enfermedades: {horseData.diseases}
             </Text>
-            {/* <Text style={styles.infoText}>
-                Usuario: {horseData.user}
-              </Text> */}
             <TouchableOpacity onPress={handleCloseInfo}>
               <Text style={styles.closeText}>Cerrar</Text>
             </TouchableOpacity>
@@ -180,11 +180,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#21AEF9',
     paddingHorizontal: 20,
-
   },
-
   textHorseName: {
     fontSize: 30,
     fontWeight: 'bold',
@@ -192,7 +189,6 @@ const styles = StyleSheet.create({
     color: 'white',
     marginTop: '10%'
   },
-
   goBackButton: {
     backgroundColor: 'white',
     borderRadius: 50,
@@ -202,14 +198,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: '10%'
   },
-
   parametrosContainer: {
     marginTop: '5%',
     width: '90%',
     backgroundColor: 'white',
     height: '80%'
   },
-
   vista1: {
     flexDirection: 'row',
     width: '100%',
@@ -223,7 +217,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 4,
   },
-
   textvista1: {
     color: 'black',
     fontSize: 20,
@@ -236,7 +229,6 @@ const styles = StyleSheet.create({
     marginLeft: '-5%',
     marginTop: '10%'
   },
-
   info: {
     backgroundColor: '#E2F2FB',
     width: '40%',
@@ -246,20 +238,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 20
   },
-
   contBtn: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 20,
     width: '100%',
   },
-
   btnInfo: {
     width: '40%',
     marginTop: '5%',
-
   },
-
   textBtnUbicacion: {
     width: 150,
     height: 50,
@@ -270,34 +258,28 @@ const styles = StyleSheet.create({
     lineHeight: 50,
     fontWeight: 'bold',
     fontSize: 18
-
   },
-
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     justifyContent: 'center',
     alignItems: 'center',
   },
-
   infoContainer: {
     backgroundColor: 'white',
     padding: 20,
     borderRadius: 10,
     width: '80%'
   },
-
   infoText: {
     marginBottom: 10,
     fontSize: 18
   },
-
   closeText: {
     marginTop: 20,
     color: 'blue',
     textAlign: 'center',
   },
-
   horseImage: {
     width: '20%',
     height: '15%',
@@ -307,4 +289,3 @@ const styles = StyleSheet.create({
 });
 
 export default ParametrosScreen;
-
