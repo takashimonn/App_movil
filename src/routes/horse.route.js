@@ -11,6 +11,20 @@ router.post('/horse', (req, res) => {
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 });
+// Get horse ID by name
+router.get('/horse/name/:name', (req, res) => {
+    const { name } = req.params;
+    userSchema
+    .findOne({ name: name })
+    .then((data) => {
+        if (!data) {
+            return res.status(404).json({ message: "Horse not found" });
+        }
+        res.json({ id: data._id });
+    })
+    .catch((error) => res.status(500).json({ message: error }));
+});
+
 
 // Get all horses
 router.get('/horse', (req, res) => {
