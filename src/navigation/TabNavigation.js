@@ -10,7 +10,7 @@ import PerfilScreen from '../screens/PerfilScreen';
 import VetScren from '../screens/VetScren';
 import NewVetsScreen from '../screens/NewVetsScreen';
 import BienvenidaScreen from '../screens/BienvenidaScreen';
-import { Ionicons } from '@expo/vector-icons';
+// import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
