@@ -1,32 +1,33 @@
 const mongoose = require('mongoose');
 
 const checkSchema = new mongoose.Schema({
-    horseId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Horse', // Nombre del modelo de caballo
-        required: true
+    namehorse: {
+        type: String,
+        required: true,
+        trim: true,
     },
     medicines: {
         type: String, 
-        required: true, 
+        require: true, 
     },
     specifications: {
         type: String, 
-        required: true, 
+        require: true, 
     }, 
     food: {
         type: String, 
-        required: true,  
+        require: true,  
     }, 
     horseshoes: {
         type: String, 
-        required: true,
+        require: true,
     },
     job: {
         type: String, 
-        required: true,
+        require: true,
     },
 });
 
-module.exports = mongoose.model("Check", checkSchema);
+module.exports = mongoose.model("check", checkSchema);
+
 

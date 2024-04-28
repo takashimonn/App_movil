@@ -10,7 +10,6 @@ import PerfilScreen from '../screens/PerfilScreen';
 import VetScren from '../screens/VetScren';
 import NewVetsScreen from '../screens/NewVetsScreen';
 import BienvenidaScreen from '../screens/BienvenidaScreen';
-import VerChequeos from '../screens/verChequeos';
 // import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
@@ -29,7 +28,6 @@ function InicioStack() {
         <Stack.Screen name="NuevoCab" component={AgregarCabScreen} options={{ headerShown: false}} />
         <Stack.Screen name="Chequeo" component={ChequeoScreen} options={{ headerShown: false }} />
         <Stack.Screen name="vets" component={VetScren} options={{ headerShown: false }} />
-        <Stack.Screen name="VerCheks" component={VerChequeos} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }
