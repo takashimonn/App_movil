@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as SecureStore from 'expo-secure-store';
 
 const VetScreen = ({navigation}) => {
+  const [userData, setUserData] = useState(null);
   const [veterinarians, setVeterinarians] = useState([]);
   const [showButtons, setShowButtons] = useState({});
   const [showUpdateForm, setShowUpdateForm] = useState(false);
@@ -130,12 +131,14 @@ const VetScreen = ({navigation}) => {
         <Text style={styles.textContBlue}>
           Veterinarios 
         </Text>
+        {userData && (userData.typeUser === 'manager' || userData.typeUser === 'admin') && (
         <TouchableOpacity
-            onPress={() => navigation.navigate('NewVets')}  // <-- Cambio aquí
+            onPress={() => navigation.navigate('NewVets')}  
             style={styles.addButton}
           > 
           <Ionicons name="add" size={30} color="#21AEF9" />
         </TouchableOpacity>
+        )}
       </View>
       </View>
 
@@ -159,7 +162,7 @@ const VetScreen = ({navigation}) => {
       <Ionicons name="call-outline" size={16} color="black" style={styles.icon} />
       <Text style={styles.text}>Teléfono: {vet.phone}</Text>
     </View>
-    {showButtons[index] && (
+    {/* {showButtons[index] && (
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={() => confirmDelete(vet._id)}>
           <Text style={styles.text_btn}>Eliminar</Text>
@@ -170,7 +173,20 @@ const VetScreen = ({navigation}) => {
             <Text style={styles.text_btn}>Actualizar</Text>
         </TouchableOpacity>
       </View>
-    )}
+    )} */}
+    {showButtons[index] && (userData && (userData.typeUser === 'manager' || userData.typeUser === 'admin')) && (
+  <View style={styles.buttonContainer}>
+    <TouchableOpacity style={styles.button} onPress={() => confirmDelete(vet._id)}>
+      <Text style={styles.text_btn}>Eliminar</Text>
+    </TouchableOpacity>
+    <TouchableOpacity 
+      style={[styles.button, styles.updateButton]} 
+      onPress={() => handleUpdatePress(vet)}>
+        <Text style={styles.text_btn}>Actualizar</Text>
+    </TouchableOpacity>
+  </View>
+)}
+
   </TouchableOpacity>
 ))}
       </View>
@@ -289,7 +305,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginBottom: '7%',
-    width: '95%',
+    width: '90%',
     marginLeft: '1%',
     ...Platform.select({
       ios: {
