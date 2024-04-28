@@ -69,6 +69,10 @@ const ParametrosScreen = ({ route }) => {
     navigation.navigate('Chequeo', { caballoNombre: horseData ? horseData.name : "Nombre del Caballo" });
   };
 
+  const verchequeo = () => {
+    navigation.navigate('verCheks', { caballoNombre: horseData ? horseData.name : "Nombre del Caballo" });
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -131,6 +135,15 @@ const ParametrosScreen = ({ route }) => {
             onPress={chequeo}
           >
             <Text style={styles.textBtnUbicacion}>Chequeo</Text>
+          </TouchableOpacity>
+          )}
+
+        {userData && (userData.typeUser === 'admin') && (
+          <TouchableOpacity
+            style={styles.btnInfo}
+            onPress={verchequeo}
+          >
+            <Text style={styles.textBtnUbicacion}>Ver Chequeo</Text>
           </TouchableOpacity>
           )}
         </View>
