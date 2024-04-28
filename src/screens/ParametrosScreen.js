@@ -66,7 +66,11 @@ const ParametrosScreen = ({ route }) => {
   };
 
   const chequeo = () => {
-    navigation.navigate('Chequeo', { caballoNombre: horseData ? horseData.name : "Nombre del Caballo" });
+    navigation.navigate('Chequeo', { caballoId: horseData ? horseData._id : "", caballoNombre: horseData ? horseData.name : "Nombre del Caballo" });
+  };
+
+  const verCheks = () => {
+    navigation.navigate('VerCheks', { caballoId: horseData ? horseData._id : "", caballoNombre: horseData ? horseData.name : "Nombre del Caballo" });
   };
 
   return (
@@ -133,6 +137,15 @@ const ParametrosScreen = ({ route }) => {
             <Text style={styles.textBtnUbicacion}>Chequeo</Text>
           </TouchableOpacity>
           )}
+
+        {userData && (userData.typeUser === 'admin') && (
+          <TouchableOpacity
+            style={styles.btnInfo}
+            onPress={verCheks}
+          >
+            <Text style={styles.textBtnUbicacion}> Ver Chequeos</Text>
+          </TouchableOpacity>
+        )}
         </View>
       </View>
 

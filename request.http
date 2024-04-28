@@ -117,10 +117,10 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/api/checks HTTP/1.1
+GET https://app-movil-lzm2.vercel.app/api/checks HTTP/1.1
 
 ###
-GET http://localhost:3000/api/checks/6614cfadabbf3b53b8877eb2
+GET http://localhost:3000/api/checks/moro
 
 ###
 PUT http://localhost:3000/api/checks/6614cfadabbf3b53b8877eb2 HTTP/1.1
