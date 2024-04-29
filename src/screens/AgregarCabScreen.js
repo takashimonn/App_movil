@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground, Image, ScrollView } from 'react-native';
 import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
 import * as SecureStore from 'expo-secure-store';
@@ -9,6 +9,7 @@ const AgregarCabScreen = ({ navigation }) => {
   const [edad, setEdad] = useState('');
   const [raza, setRaza] = useState('');
   const [enfermedades, setEnfermedades] = useState('');
+  const [sensor, setSensor] = useState('');
 
   const enviarDatos = async () => {
     try {
@@ -17,6 +18,7 @@ const AgregarCabScreen = ({ navigation }) => {
         age: edad,
         breed: raza,
         diseases: enfermedades,
+        sensor: sensor,
       };
 
       const token = await SecureStore.getItemAsync('token');
@@ -51,7 +53,7 @@ const AgregarCabScreen = ({ navigation }) => {
       </ImageBackground>
 
       <View style={styles.contWhite}>
-        <View style={styles.formulario}>
+        <ScrollView contentContainerStyle={styles.formulario}>
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Nombre:</Text>
             <View style={styles.input}>
@@ -97,10 +99,21 @@ const AgregarCabScreen = ({ navigation }) => {
               />
             </View>
           </View>
-        </View>
-        <TouchableOpacity style={styles.botonAgregar} onPress={enviarDatos}>
-          <Text style={styles.textoBoton}>Agregar</Text>
-        </TouchableOpacity>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Sensor:</Text>
+            <View style={styles.input}>
+              <Image source={require('../../assets/type_horse.png')} style={styles.iconHorse} />
+              <TextInput
+                placeholder="Ingrese el sensor"
+                onChangeText={text => setSensor(text)}
+                style={styles.inputText}
+              />
+            </View>
+          </View>
+          <TouchableOpacity style={styles.botonAgregar} onPress={enviarDatos}>
+            <Text style={styles.textoBoton}>Agregar</Text>
+          </TouchableOpacity>
+        </ScrollView>
       </View>
     </View>
   );
@@ -109,8 +122,6 @@ const AgregarCabScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: 'white'
   },
   textContBlue: {
@@ -124,23 +135,20 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     width: '100%',
-    height: '70%',
+    height: '60%',
     zIndex: 1, 
   },
   contWhite: {
-    position: 'absolute', 
-    top: '40%', 
-    width: '100%',
-    height: '80%', 
+    flex: 1,
     backgroundColor: 'white',
     borderRadius: 20,
-    zIndex: 2, 
-    alignItems: 'center'
+    marginTop: '70%',  
+    padding: 20,
+    zIndex: 2,
   },
   formulario: {
-    width: '90%',
-    marginBottom: 20,
-    marginTop: '10%',
+    flexGrow: 1,
+    justifyContent: 'center',
     alignItems: 'center'
   },
   label: {
@@ -149,7 +157,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   inputContainer: {
-    marginBottom: 10,
+    marginBottom: 20,
     width: '90%',
   },
   input: {
@@ -158,7 +166,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 5,
-    marginBottom: 10,
   },
   inputText: {
     flex: 1,
@@ -171,6 +178,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
+    alignSelf: 'center',
+    marginTop: 20,
   },
   textoBoton: {
     color: 'white',
@@ -185,19 +194,13 @@ const styles = StyleSheet.create({
     height: '100%',   
     marginTop: '-10%'          
   },
-  icon: {
-    marginRight: 10,
-  },
-
   iconInput:{
     marginLeft: 10,
   },
-
   iconHorse: {
     width: 32,
     height: 32,
     marginLeft: 10,
-
   }
 });
 

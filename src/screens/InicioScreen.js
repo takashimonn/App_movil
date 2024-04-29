@@ -39,14 +39,6 @@ const InicioScreen = ({ navigation }) => {
             <View style={styles.blueContainer}>
                 <View style={styles.headerContent}>
                     <Text style={styles.textBlueCont}>Registro de caballos</Text>
-                        {userData && (userData.typeUser === 'manager' || userData.typeUser === 'admin') && (
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate('NuevoCab')}
-                            style={styles.addButton}
-                        >
-                            <Ionicons name="add" size={30} color="#21AEF9" />
-                        </TouchableOpacity>
-                    )}
                 </View>
             </View>
 
@@ -67,6 +59,15 @@ const InicioScreen = ({ navigation }) => {
                             </View>
                         </TouchableOpacity>
                     ))}
+
+{userData && (userData.typeUser === 'manager' || userData.typeUser === 'admin') && (
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('NuevoCab')}
+                            style={styles.addButton}
+                        >
+                            <Ionicons name="add" size={30} color="#21AEF9" />
+                        </TouchableOpacity>
+                    )}
                 </View>
             </ScrollView>
         </View>
