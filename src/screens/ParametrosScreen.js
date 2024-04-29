@@ -29,6 +29,20 @@ const ParametrosScreen = ({ route }) => {
     fetchHorseData();
   }, [route.params.caballoId]);
 
+  const deleteHorse = async () => {
+    try {
+      const token = await SecureStore.getItemAsync('token');
+      await axios.delete(`https://app-movil-lzm2.vercel.app/api/horse/${route.params.caballoId}`, {
+        headers: {
+          'x-access-token': token
+        }
+      });
+      navigation.navigate('InicioStackScreen');
+    } catch (error) {
+      console.error("Error al eliminar el caballo:", error);
+    }
+  };
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -144,6 +158,15 @@ const ParametrosScreen = ({ route }) => {
             onPress={verchequeo}
           >
             <Text style={styles.textBtnUbicacion}>Ver Chequeo</Text>
+          </TouchableOpacity>
+          )}
+
+{userData && (userData.typeUser === 'admin') && (
+          <TouchableOpacity
+            style={styles.btnInfo}
+            onPress={deleteHorse}
+          >
+            <Text style={styles.textBtnUbicacion}>eliminar</Text>
           </TouchableOpacity>
           )}
         </View>

@@ -34,6 +34,8 @@ const InicioScreen = ({ navigation }) => {
         getData();
     }, []); 
 
+    getData();
+
     return (
         <View style={styles.container}>
              <View style={styles.blueContainer}>
