@@ -48,10 +48,10 @@ import { View, Image, StyleSheet, FlatList, Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
 const images = [
-  require('../../assets/slide01.png'),
-  require('../../assets/slide02.png'),
-  require('../../assets/slide03.png'),
-  require('../../assets/slide04.png'),
+  require('../../assets/slide01.jpg'),
+  require('../../assets/slide02.jpg'),
+  require('../../assets/slide03.jpg'),
+  require('../../assets/slide04.jpg'),
 ];
 
 const backgroundColors = ['#F9E59E', '#FDF9DE', '#71E1BC', '#FDF9DE']; 
