@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import * as SecureStore from 'expo-secure-store';
 import { Ionicons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons'
 
 const ParametrosScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -118,25 +119,28 @@ const ParametrosScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.textHorseName}>
-          {horseData ? horseData.name : "Cargando..."}
-        </Text>
-        <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate('InicioStackScreen')}>
-          <Ionicons name="arrow-back" size={24} color="#21AEF9" />
+<View style={styles.header}>
+  <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate('InicioStackScreen')}>
+    <Ionicons name="arrow-back" size={24} color="#21AEF9" />
+  </TouchableOpacity>
+  <View style={styles.headerContent}>
+    <Text style={styles.textHorseName}>
+      {horseData ? horseData.name : "Cargando..."}
+    </Text>
+
+    {userData && (userData.typeUser === 'admin' || userData.typeUser === 'manager' ) && (
+      <View style={styles.iconoHeader}>
+        <TouchableOpacity style={styles.icono} onPress={deleteHorse}>
+          <Ionicons name="trash-outline" size={30} color="white" />
         </TouchableOpacity>
 
-        {userData && (userData.typeUser === 'admin' || userData.typeUser === 'manager' ) && (
-          <TouchableOpacity
-            style={styles.btnInfo}
-            onPress={deleteHorse}
-          >
-            <Image source={require('../../assets/eliminar.png')} style={styles.imgEliminar}></Image>
-            {/* <Text style={styles.textBtnUbicacion}>eliminar</Text> */}
-          </TouchableOpacity>
-          )}
-
+        <TouchableOpacity style={styles.icono} onPress={showUpdateForm}>
+          <Feather name="edit" size={30} color="white" />
+        </TouchableOpacity>
       </View>
+    )}
+  </View>
+</View>
 
       <View style={styles.parametrosContainer}>
         <View style={styles.vista1}>
@@ -201,14 +205,7 @@ const ParametrosScreen = ({ route }) => {
           </TouchableOpacity>
           )}
 
-{userData && (userData.typeUser === 'admin') && (
-  <TouchableOpacity
-  style={styles.btnInfo}
-  onPress={showUpdateForm} // Aquí se llama a la función showUpdateForm al presionar el botón
->
-  <Text style={styles.textBtnUbicacion}>actualizar</Text>
-</TouchableOpacity>
-          )}
+
 
 
         </View>
@@ -263,9 +260,9 @@ const styles = StyleSheet.create({
   textHorseName: {
     fontSize: 30,
     fontWeight: 'bold',
-    textAlign: 'left',
     color: 'white',
-    marginTop: '10%'
+    flex: 1, 
+    marginLeft: '5%'
   },
   goBackButton: {
     backgroundColor: 'white',
@@ -273,7 +270,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
     marginTop: '10%'
   },
   parametrosContainer: {
@@ -367,6 +364,18 @@ const styles = StyleSheet.create({
   imgEliminar: {
     width: 25,
     height: 25
+  },
+  headerContent: {
+    flexDirection: 'row',
+    marginTop: '10%',
+    alignItems: 'center', 
+  },
+  iconoHeader: {
+    flexDirection: 'row', 
+    marginRight: '5%', 
+  },
+  icono: {
+    marginRight: 25, 
   }
 });
 
