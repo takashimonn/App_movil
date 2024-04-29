@@ -253,6 +253,7 @@ const AgregarCabScreen = ({ navigation, route }) => {
 
       console.log('Caballo agregado:', response.data);
       Alert.alert('Registro exitoso');
+      navigation.navigate('InicioStackScreen')
     } catch (error) {
       console.error('Error al agregar el caballo:', error);
       Alert.alert('Error', 'Ocurrió un error al agregar el caballo.');
@@ -278,6 +279,7 @@ const AgregarCabScreen = ({ navigation, route }) => {
         "Actualización exitosa",
         "Los datos del caballo han sido actualizados exitosamente."
       );
+      navigation.navigate('InicioStackScreen')
     } catch (error) {
       console.error("Error al actualizar el caballo:", error);
     }

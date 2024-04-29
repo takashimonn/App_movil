@@ -228,9 +228,11 @@ import { View, Text, TouchableOpacity, ScrollView, StyleSheet, TextInput, Alert,
 import { CheckBox } from 'react-native-elements';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
-import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const ChequeoScreen = ({ route }) => {
+  const navigation = useNavigation(); 
+
   const { caballoNombre } = route.params;
   // se declara el estado del componente como nulo
   const [nombre] = useState(caballoNombre || '');
@@ -271,8 +273,10 @@ const ChequeoScreen = ({ route }) => {
       }
     }
       );
+      navigation.navigate('InicioStackScreen');
       console.log('Caballo agregado:', response.data);
       Alert.alert('Registro exitoso');
+      
     } catch (error) {
       console.error('Error al agregar el caballo:', error);
       Alert.alert('Error', 'Ocurrió un error al agregar el caballo');

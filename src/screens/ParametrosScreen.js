@@ -109,10 +109,14 @@ const ParametrosScreen = ({ route }) => {
     );
   };
 
-  const chequeo = () => {
-    navigation.navigate('Chequeo', { caballoNombre: horseData ? horseData.name : "Nombre del Caballo" });
-  };
+  // const chequeo = () => {
+  //   navigation.navigate('Chequeo', { caballoNombre: horseData ? horseData.name : "Nombre del Caballo" });
+  // };
 
+  const chequeo = () => {
+    navigation.navigate('Chequeo', { caballoId: horseData ? horseData.id : null });
+  };
+  
   const verchequeo = () => {
     navigation.navigate('verCheks', { caballoNombre: horseData ? horseData.name : "Nombre del Caballo" });
   }

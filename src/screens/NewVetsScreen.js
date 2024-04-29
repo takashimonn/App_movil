@@ -23,11 +23,12 @@ const NewVetsScreen = ({navigation}) => {
           'x-access-token': `${token}`
       }
       });
-
+      navigation.navigate('vets')
       console.log(response.data); 
       Alert.alert('Registro exitoso');
 
     } catch (error) {
+     
       console.error('Error al registrar:', error);
       Alert.alert('Error al registrar', 'Por favor, inténtalo de nuevo');
     }
