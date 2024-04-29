@@ -1,15 +1,26 @@
-// import React, { useState } from 'react';
+// import React, { useState, useEffect } from 'react';
 // import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground, Image, ScrollView } from 'react-native';
 // import axios from 'axios';
 // import { Ionicons } from '@expo/vector-icons';
 // import * as SecureStore from 'expo-secure-store';
 
-// const AgregarCabScreen = ({ navigation }) => {
+// const AgregarCabScreen = ({ navigation, route }) => {
 //   const [nombre, setNombre] = useState('');
 //   const [edad, setEdad] = useState('');
 //   const [raza, setRaza] = useState('');
 //   const [enfermedades, setEnfermedades] = useState('');
 //   const [sensor, setSensor] = useState('');
+//   const [caballoData, setCaballoData] = useState(route.params?.caballoData || null);
+
+//   useEffect(() => {
+//     if (caballoData) {
+//       setNombre(caballoData.name);
+//       setEdad(caballoData.age);
+//       setRaza(caballoData.breed);
+//       setEnfermedades(caballoData.diseases);
+//       setSensor(caballoData.sensor);
+//     }
+//   }, [caballoData]);
 
 //   const enviarDatos = async () => {
 //     try {
@@ -22,29 +33,54 @@
 //       };
 
 //       const token = await SecureStore.getItemAsync('token');
-  
+
 //       const response = await axios.post('https://app-movil-lzm2.vercel.app/api/horse', data, {
 //         headers: {
 //           'Content-Type': 'application/json',
 //           'x-access-token': `${token}`
 //         },
 //       });
-  
+
 //       console.log('Caballo agregado:', response.data);
-//       Alert.alert('Registro exitoso'); 
+//       Alert.alert('Registro exitoso');
+//       navigation.navigate('InicioStackScreen')
 //     } catch (error) {
 //       console.error('Error al agregar el caballo:', error);
 //       Alert.alert('Error', 'Ocurrió un error al agregar el caballo.');
 //     }
 //   };
 
-  
-  
+//   const handleUpdateHorse = async () => {
+//     try {
+//       const token = await SecureStore.getItemAsync('token');
+//       const response = await axios.put(`https://app-movil-lzm2.vercel.app/api/horse/${caballoData._id}`, {
+//         name: nombre,
+//         age: edad,
+//         breed: raza,
+//         diseases: enfermedades,
+//         sensor: sensor, 
+//       }, {
+//         headers: {
+//           'x-access-token': token
+//         }
+//       });
+
+//       Alert.alert(
+//         "Actualización exitosa",
+//         "Los datos del caballo han sido actualizados exitosamente."
+//       );
+//       navigation.navigate('InicioStackScreen')
+//     } catch (error) {
+//       console.error("Error al actualizar el caballo:", error);
+//     }
+//   };
+
+
 //   return (
 //     <View style={styles.container}>
 //       <ImageBackground source={require('../../assets/fondo_azul.jpeg')} style={styles.contBlue}>
 //         <View style={styles.headerContent}>
-//           <Text style={styles.textContBlue}>Nuevo Caballo</Text>
+//           <Text style={styles.textContBlue}>{caballoData ? "Actualizar Caballo" : "Nuevo Caballo"}</Text>
 //           <TouchableOpacity
 //             onPress={() => navigation.navigate('InicioStackScreen')}
 //             style={styles.addButton}
@@ -57,11 +93,12 @@
 //       <View style={styles.contWhite}>
 //         <ScrollView contentContainerStyle={styles.formulario}>
 //           <View style={styles.inputContainer}>
-//             <Text style={styles.label}>Nombre:</Text>
+//             <Text style={styles.label}>Nombre:{caballoData.nombre}</Text>
 //             <View style={styles.input}>
 //               <Image source={require('../../assets/horse.png')} style={styles.iconHorse} />
 //               <TextInput
 //                 placeholder="Ingrese el nombre"
+//                 value={nombre}
 //                 onChangeText={text => setNombre(text)}
 //                 style={styles.inputText}
 //               />
@@ -74,6 +111,7 @@
 //               <TextInput
 //                 placeholder="Ingrese la edad"
 //                 keyboardType="numeric"
+//                 value={edad}
 //                 onChangeText={text => setEdad(text)}
 //                 style={styles.inputText}
 //               />
@@ -85,6 +123,7 @@
 //               <Image source={require('../../assets/type_horse.png')} style={styles.iconHorse} />
 //               <TextInput
 //                 placeholder="Ingrese la raza"
+//                 value={raza}
 //                 onChangeText={text => setRaza(text)}
 //                 style={styles.inputText}
 //               />
@@ -96,6 +135,7 @@
 //               <Ionicons style={styles.iconInput} name="bandage-outline" size={24} color="black" />
 //               <TextInput
 //                 placeholder="Ingrese las enfermedades"
+//                 value={enfermedades}
 //                 onChangeText={text => setEnfermedades(text)}
 //                 style={styles.inputText}
 //               />
@@ -107,13 +147,14 @@
 //               <Image source={require('../../assets/type_horse.png')} style={styles.iconHorse} />
 //               <TextInput
 //                 placeholder="Ingrese el sensor"
+//                 value={sensor}
 //                 onChangeText={text => setSensor(text)}
 //                 style={styles.inputText}
 //               />
 //             </View>
 //           </View>
-//           <TouchableOpacity style={styles.botonAgregar} onPress={enviarDatos}>
-//             <Text style={styles.textoBoton}>Agregar</Text>
+//           <TouchableOpacity style={styles.botonAgregar} onPress={caballoData ? handleUpdateHorse : enviarDatos}>
+//             <Text style={styles.textoBoton}>{caballoData ? "Actualizar" : "Agregar"}</Text>
 //           </TouchableOpacity>
 //         </ScrollView>
 //       </View>
@@ -138,13 +179,13 @@
 //     left: 0,
 //     width: '100%',
 //     height: '60%',
-//     zIndex: 1, 
+//     zIndex: 1,
 //   },
 //   contWhite: {
 //     flex: 1,
 //     backgroundColor: 'white',
 //     borderRadius: 20,
-//     marginTop: '70%',  
+//     marginTop: '70%',
 //     padding: 20,
 //     zIndex: 2,
 //   },
@@ -189,14 +230,14 @@
 //     fontWeight: 'bold',
 //   },
 //   headerContent: {
-//     flexDirection: 'row',        
-//     justifyContent: 'space-between', 
-//     alignItems: 'center',       
-//     paddingHorizontal: '5%',    
-//     height: '100%',   
-//     marginTop: '-10%'          
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//     paddingHorizontal: '5%',
+//     height: '100%',
+//     marginTop: '-10%'
 //   },
-//   iconInput:{
+//   iconInput: {
 //     marginLeft: 10,
 //   },
 //   iconHorse: {
@@ -209,10 +250,11 @@
 // export default AgregarCabScreen;
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground, Image, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, Image, ScrollView } from 'react-native';
 import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
 import * as SecureStore from 'expo-secure-store';
+import Swal from 'sweetalert2';
 
 const AgregarCabScreen = ({ navigation, route }) => {
   const [nombre, setNombre] = useState('');
@@ -252,39 +294,52 @@ const AgregarCabScreen = ({ navigation, route }) => {
       });
 
       console.log('Caballo agregado:', response.data);
-      Alert.alert('Registro exitoso');
-      navigation.navigate('InicioStackScreen')
+      Swal.fire({
+        icon: 'success',
+        title: 'Registro exitoso',
+        showConfirmButton: false,
+        timer: 1500
+      });
     } catch (error) {
       console.error('Error al agregar el caballo:', error);
-      Alert.alert('Error', 'Ocurrió un error al agregar el caballo.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Ocurrió un error al agregar el caballo.'
+      });
     }
   };
 
   const handleUpdateHorse = async () => {
     try {
       const token = await SecureStore.getItemAsync('token');
-      const response = await axios.put(`https://app-movil-lzm2.vercel.app/api/horse/${caballoData._id}`, {
+      const response = await axios.put(`https://app-movil-lzm2.vercel.app/api/horse/${caballoData.id}`, {
         name: nombre,
         age: edad,
         breed: raza,
         diseases: enfermedades,
-        sensor: sensor, 
+        sensor: sensor,
       }, {
         headers: {
           'x-access-token': token
         }
       });
 
-      Alert.alert(
-        "Actualización exitosa",
-        "Los datos del caballo han sido actualizados exitosamente."
-      );
-      navigation.navigate('InicioStackScreen')
+      Swal.fire({
+        icon: 'success',
+        title: 'Actualización exitosa',
+        showConfirmButton: false,
+        timer: 1500
+      });
     } catch (error) {
       console.error("Error al actualizar el caballo:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Ocurrió un error al actualizar el caballo.'
+      });
     }
   };
-
 
   return (
     <View style={styles.container}>
@@ -303,7 +358,7 @@ const AgregarCabScreen = ({ navigation, route }) => {
       <View style={styles.contWhite}>
         <ScrollView contentContainerStyle={styles.formulario}>
           <View style={styles.inputContainer}>
-            <Text style={styles.label}>Nombre:{caballoData.nombre}</Text>
+            <Text style={styles.label}>Nombre:</Text>
             <View style={styles.input}>
               <Image source={require('../../assets/horse.png')} style={styles.iconHorse} />
               <TextInput
@@ -458,3 +513,4 @@ const styles = StyleSheet.create({
 });
 
 export default AgregarCabScreen;
+

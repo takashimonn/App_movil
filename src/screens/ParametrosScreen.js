@@ -11,6 +11,7 @@ const ParametrosScreen = ({ route }) => {
   const [userData, setUserData] = useState(null);
   const [horseData, setHorseData] = useState(null);
   const [showInfo, setShowInfo] = useState(false);
+  const [parametros, setParametros] = useState(null);
 
   useEffect(() => {
     const fetchHorseData = async () => {
@@ -29,6 +30,22 @@ const ParametrosScreen = ({ route }) => {
 
     fetchHorseData();
   }, [route.params.caballoId]);
+
+  useEffect(() => {
+    // Función para obtener los datos de la API
+    const fetchParametros = async () => {
+      try {
+        console.log(parametros)
+        const response = await axios.get('https://app-movil-lzm2.vercel.app/api/parameters');
+        setParametros(response.data);
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    };
+
+    // Llama a la función de obtener datos cuando el componente se monta
+    fetchParametros();
+  }, []);
 
   const deleteHorse = async () => {
     try {
@@ -109,9 +126,6 @@ const ParametrosScreen = ({ route }) => {
     );
   };
 
-  // const chequeo = () => {
-  //   navigation.navigate('Chequeo', { caballoNombre: horseData ? horseData.name : "Nombre del Caballo" });
-  // };
 
   const chequeo = () => {
     navigation.navigate('Chequeo', { caballoId: horseData ? horseData.id : null });
@@ -155,7 +169,7 @@ const ParametrosScreen = ({ route }) => {
             <Ionicons name="sunny-outline" size={60} color="orange" />
           </View>
           <View style={styles.info}>
-            <Text>aca van los parametros</Text>
+            <Text style={styles.textParametros}>Alta</Text>
           </View>
         </View>
 
@@ -167,7 +181,7 @@ const ParametrosScreen = ({ route }) => {
             <Ionicons name="pulse" size={60} color="red" />
           </View>
           <View style={styles.info}>
-            <Text>aca van los parametros</Text>
+            <Text style={styles.textParametros}>35</Text>
           </View>
         </View>
 
@@ -179,7 +193,7 @@ const ParametrosScreen = ({ route }) => {
             <Ionicons name="speedometer-outline" size={60} color="green" />
           </View>
           <View style={styles.info}>
-            <Text>aca van los parametros</Text>
+            <Text style={styles.textParametros}>35</Text>
           </View>
         </View>
 
@@ -380,6 +394,10 @@ const styles = StyleSheet.create({
   },
   icono: {
     marginRight: 25, 
+  },
+  textParametros: {
+    fontSize: 30, 
+    fontWeight: 'bold'
   }
 });
 

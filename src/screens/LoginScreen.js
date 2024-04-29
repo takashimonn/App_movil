@@ -12,6 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as SecureStore from 'expo-secure-store'; // Importa SecureStore de Expo
 import { AuthContext } from '../context/AuthContext';
+import Swal from 'sweetalert2';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -34,7 +35,6 @@ const LoginScreen = () => {
         console.log('Response data:', data);
   
         if (data.token !== undefined) {
-          // Utiliza SecureStore para almacenar el token de forma segura
           await SecureStore.setItemAsync('token', data.token);
           await SecureStore.setItemAsync('userData', JSON.stringify(data.userData));
           signIn();
@@ -43,6 +43,14 @@ const LoginScreen = () => {
           setPassword('');
           console.log('User data:', data.userData);
           console.log('Token:', data.token);
+
+          Swal.fire({
+            icon: 'success',
+            title: '¡Inicio de sesión exitoso!',
+            text: '¡Bienvenido de vuelta!',
+            confirmButtonColor: '#21AEF9',
+            confirmButtonText: 'Aceptar',
+          });
         } else {
           alert('Error: Token de autenticación inválido.');
           console.error('Invalid token received:', data.token);
@@ -177,3 +185,4 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
+
