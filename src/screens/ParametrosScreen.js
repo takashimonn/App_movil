@@ -43,6 +43,34 @@ const ParametrosScreen = ({ route }) => {
     }
   };
 
+
+  const handleUpdateHorse = async () => {
+    try {
+      const token = await SecureStore.getItemAsync('token');
+      const response = await axios.put(`https://app-movil-lzm2.vercel.app/api/horse/${route.params.caballoId}`, updateHorseData, {
+        headers: {
+          'x-access-token': token
+        }
+      });
+
+      setHorseData(response.data);
+
+      Alert.alert(
+        "Actualización exitosa",
+        "Los datos del caballo han sido actualizados exitosamente."
+      );
+    } catch (error) {
+      console.error("Error al actualizar el caballo:", error);
+    }
+  };
+  const showUpdateForm = () => {
+    if (horseData) {
+      navigation.navigate('NuevoCab', { caballoData: horseData });
+    } else {
+      Alert.alert("Error", "No se han encontrado datos del caballo para actualizar.");
+    }
+  };
+  
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -56,6 +84,7 @@ const ParametrosScreen = ({ route }) => {
 
     fetchUserData();
   }, []);
+  
 
   const handleShowInfo = () => {
     setShowInfo(true);
@@ -96,6 +125,17 @@ const ParametrosScreen = ({ route }) => {
         <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate('InicioStackScreen')}>
           <Ionicons name="arrow-back" size={24} color="#21AEF9" />
         </TouchableOpacity>
+
+        {userData && (userData.typeUser === 'admin' || userData.typeUser === 'manager' ) && (
+          <TouchableOpacity
+            style={styles.btnInfo}
+            onPress={deleteHorse}
+          >
+            
+            <Text style={styles.textBtnUbicacion}>eliminar</Text>
+          </TouchableOpacity>
+          )}
+
       </View>
 
       <View style={styles.parametrosContainer}>
@@ -162,13 +202,15 @@ const ParametrosScreen = ({ route }) => {
           )}
 
 {userData && (userData.typeUser === 'admin') && (
-          <TouchableOpacity
-            style={styles.btnInfo}
-            onPress={deleteHorse}
-          >
-            <Text style={styles.textBtnUbicacion}>eliminar</Text>
-          </TouchableOpacity>
+  <TouchableOpacity
+  style={styles.btnInfo}
+  onPress={showUpdateForm} // Aquí se llama a la función showUpdateForm al presionar el botón
+>
+  <Text style={styles.textBtnUbicacion}>actualizar</Text>
+</TouchableOpacity>
           )}
+
+
         </View>
       </View>
 
