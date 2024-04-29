@@ -36,13 +36,11 @@ const InicioScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.blueContainer}>
-                <View style={styles.headerContent}>
-                    <Text style={styles.textBlueCont}>Registro de caballos</Text>
-                </View>
-            </View>
-
-
+             <View style={styles.blueContainer}>
+                 <View style={styles.headerContent}>
+                     <Text style={styles.textBlueCont}>Registro de caballos</Text>
+                 </View>
+             </View>
             <ScrollView style={styles.scrollView}>
                 <View style={styles.content}>
                     {caballos.map(caballo => (
@@ -59,17 +57,16 @@ const InicioScreen = ({ navigation }) => {
                             </View>
                         </TouchableOpacity>
                     ))}
-
-{userData && (userData.typeUser === 'manager' || userData.typeUser === 'admin') && (
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate('NuevoCab')}
-                            style={styles.addButton}
-                        >
-                            <Ionicons name="add" size={30} color="#21AEF9" />
-                        </TouchableOpacity>
-                    )}
                 </View>
             </ScrollView>
+            {userData && (userData.typeUser === 'manager' || userData.typeUser === 'admin') && (
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('NuevoCab')}
+                    style={styles.addButton}
+                >
+                    <Ionicons name="add" size={30} color="#21AEF9" />
+                </TouchableOpacity>
+            )}
         </View>
     );
 }
@@ -92,21 +89,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: '50%'
     },
-    headerContent: {
-        flexDirection: 'row',        
-        justifyContent: 'space-between', 
-        alignItems: 'center',       
-        paddingHorizontal: '5%',    
-        height: '100%',             
-      },
-    blueContainer: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: 300,
-        backgroundColor: '#21AEF9',
-    },
     animal: {
         width: '90%',
         height: 100,
@@ -124,12 +106,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     addButton:{
+        position: 'absolute',
+        bottom: 20,
+        right: 20,
         backgroundColor:'white',
         width: 50,             
         height: 50,             
         borderRadius: 25,     
         alignItems: 'center',
-        marginRight: '3%',
         justifyContent: 'center',
         ...Platform.select({
           android: {
@@ -143,16 +127,10 @@ const styles = StyleSheet.create({
           },
         }),
       },
-
     textBtnHorseName: {
         color: '#333',
         fontSize: 20,
         fontWeight: 'bold',
-    },
-    textBlueCont: {
-        fontSize: 30,
-        color: 'white',
-        fontWeight: 'bold'
     },
     iconAndTextContainer: {
         flexDirection: 'row',
@@ -164,6 +142,26 @@ const styles = StyleSheet.create({
         marginRight: 20,
         marginLeft: 20
     },
+    headerContent: {
+        flexDirection: 'row',        
+        justifyContent: 'space-between', 
+        alignItems: 'center',       
+        paddingHorizontal: '5%',    
+        height: '100%',             
+      },
+    blueContainer: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 300,
+        backgroundColor: '#21AEF9',
+    },
+    textBlueCont: {
+        fontSize: 30,
+        color: 'white',
+        fontWeight: 'bold'
+    }
 });
 
 export default InicioScreen;
