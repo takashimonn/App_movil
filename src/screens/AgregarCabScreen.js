@@ -267,7 +267,7 @@ const AgregarCabScreen = ({ navigation, route }) => {
         age: edad,
         breed: raza,
         diseases: enfermedades,
-        sensor: sensor,
+        sensor: sensor, 
       }, {
         headers: {
           'x-access-token': token
