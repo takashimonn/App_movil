@@ -131,8 +131,8 @@ const ParametrosScreen = ({ route }) => {
             style={styles.btnInfo}
             onPress={deleteHorse}
           >
-            
-            <Text style={styles.textBtnUbicacion}>eliminar</Text>
+            <Image source={require('../../assets/eliminar.png')} style={styles.imgEliminar}></Image>
+            {/* <Text style={styles.textBtnUbicacion}>eliminar</Text> */}
           </TouchableOpacity>
           )}
 
@@ -364,6 +364,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 10,
   },
+  imgEliminar: {
+    width: 25,
+    height: 25
+  }
 });
 
 export default ParametrosScreen;

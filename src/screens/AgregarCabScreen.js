@@ -262,7 +262,7 @@ const AgregarCabScreen = ({ navigation, route }) => {
   const handleUpdateHorse = async () => {
     try {
       const token = await SecureStore.getItemAsync('token');
-      const response = await axios.put(`https://app-movil-lzm2.vercel.app/api/horse/${caballoData.id}`, {
+      const response = await axios.put(`https://app-movil-lzm2.vercel.app/api/horse/${caballoData._id}`, {
         name: nombre,
         age: edad,
         breed: raza,
@@ -283,6 +283,7 @@ const AgregarCabScreen = ({ navigation, route }) => {
     }
   };
 
+
   return (
     <View style={styles.container}>
       <ImageBackground source={require('../../assets/fondo_azul.jpeg')} style={styles.contBlue}>
@@ -300,7 +301,7 @@ const AgregarCabScreen = ({ navigation, route }) => {
       <View style={styles.contWhite}>
         <ScrollView contentContainerStyle={styles.formulario}>
           <View style={styles.inputContainer}>
-            <Text style={styles.label}>Nombre:</Text>
+            <Text style={styles.label}>Nombre:{caballoData.nombre}</Text>
             <View style={styles.input}>
               <Image source={require('../../assets/horse.png')} style={styles.iconHorse} />
               <TextInput
