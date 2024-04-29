@@ -16,19 +16,34 @@ const NewVetsScreen = ({navigation}) => {
   const handleChange = (name, value) => setVet({ ...vet, [name]: value });
 
   const handleRegister = async () => {
+    // Validación del campo de teléfono
+    if (vet.phone.length !== 10) {
+      Alert.alert('Error', 'El teléfono debe tener 10 dígitos');
+      return;
+    }
+    // Validación del campo de edad
+    if (vet.age.length > 2) {
+      Alert.alert('Error', 'La edad no puede tener más de 2 dígitos');
+      return;
+    }
+    // Validación del campo de correo electrónico
+    if (!vet.email.endsWith('@gmail.com') && !vet.email.endsWith('@hotmail.com')) {
+      Alert.alert('Error', 'El correo electrónico debe ser de Gmail o Hotmail');
+      return;
+    }
+
     try {
       const token = await SecureStore.getItemAsync('token');
       const response = await axios.post('https://app-movil-lzm2.vercel.app/api/vets', vet, {
         headers: {
           'x-access-token': `${token}`
-      }
+        }
       });
       navigation.navigate('vets')
       console.log(response.data); 
       Alert.alert('Registro exitoso');
 
     } catch (error) {
-     
       console.error('Error al registrar:', error);
       Alert.alert('Error al registrar', 'Por favor, inténtalo de nuevo');
     }
@@ -82,6 +97,8 @@ const NewVetsScreen = ({navigation}) => {
                     style={styles.inputText}
                     placeholder="Ingrese la Edad"
                     onChangeText={text => handleChange("age", text)}
+                    keyboardType="numeric"
+                    maxLength={2} 
                   />
             </View>
           </View>
@@ -106,6 +123,8 @@ const NewVetsScreen = ({navigation}) => {
                     style={styles.inputText}
                     placeholder="Ingrese el Teléfono"
                     onChangeText={text => handleChange("phone", text)}
+                    keyboardType="numeric"
+                    maxLength={10} // Limita la longitud a 10 dígitos
                   />
             </View>
           </View>
@@ -201,4 +220,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NewVetsScreen
+export default NewVetsScreen;
